@@ -1,11 +1,14 @@
 import {test,expect} from '@playwright/test';
 import {LoginPage} from '../../src/pages/LoginPage';
+import { HomePage } from '../../src/pages/HomePage';
 
-let loginPage:LoginPage
+let loginPage:LoginPage;
+let homePage:HomePage;
 
 test.beforeEach(async ({page}) =>{
 loginPage = new LoginPage(page);
 await loginPage.goToLoginPage();
+homePage=new HomePage(page);
 
 })
 
@@ -21,7 +24,10 @@ expect(await loginPage.isForgottenPasswordLinkExist()).toBeTruthy();
 });
 
 test('User is able to login',async({}) => {
-await loginPage.doLogin('test@test.com','test123');
+await loginPage.doLogin('testuser1234@test.com','test123');
+expect.soft(await homePage.isLogoutLinkexist()).toBeTruthy();
+expect.soft(await homePage.HomePageTitle()).toBe('My Account');
+
 });
 
 test('Validate the error message',async()=>{

@@ -12,13 +12,14 @@ private readonly loginPageErrorMessage:Locator;
 private readonly newCustomerHeadingTitle:Locator;
 private readonly returningCustomertext:Locator;
 
+
 //2. constructor of page class = initialise the locator
  constructor(page:Page){
  super(page);
  this.emailId= page.getByRole('textbox', { name: 'E-Mail Address' });
  this.password=page.getByLabel('Password');
  this.login=page.getByRole('button', { name: 'Login' });
- this.forgotttenPassword=page.getByRole('button', { name: 'Login' }).first();
+ this.forgotttenPassword=page.getByRole('link', { name: 'Forgotten Password' }).first();
  this.loginPageErrorMessage=page.locator('.alert.alert-danger.alert-dismissible');
  this.newCustomerHeadingTitle=page.getByRole('heading', { name: 'New Customer', level: 2 });
  this.returningCustomertext=page.locator('#content > div.row > div.col-sm-6:nth-of-type(2) > div.well > p > strong');

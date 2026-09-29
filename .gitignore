@@ -5,8 +5,15 @@ playwright-report/
 blob-report/
 playwright/.cache/
 playwright/.auth/
+/reports/
+/reporting-labs/
+/allure-report/
+/allure-results/
 
 # Environment variables
-.env
+config/.env.*
 .env.*
 !.env.example
+
+reporting-labs.history.json
+

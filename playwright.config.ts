@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import reportingLabs from './reporting-labs.config';
 
 /**
  * Read environment variables from file.
@@ -7,6 +9,13 @@ import { defineConfig, devices } from '@playwright/test';
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// npm install dotenv 
+// Env=qa npx playwright test
+const ENV = process.env.ENV || "qa";
+console.log("Running test on env : ",ENV);
+dotenv.config({path: `src/config/.env.${ENV}`})
+
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -22,15 +31,27 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+  ["list"],
+  ['reporting-labs', reportingLabs], 
+  ["html", {
+    outputFolder: "reports/html-report",
+    open: "never"
+  }],
+  ["allure-playwright", {
+    outputFolder: "allure-results",
+    suiteTitle: true
+  }],
+],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://naveenautomationlabs.com/',
+    baseURL: process.env.BASEURL,
+
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless:false
+    headless:true
   },
 
   /* Configure projects for major browsers */
@@ -70,6 +91,10 @@ export default defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
+
+
+
+
 
   /* Run your local dev server before starting the tests */
   // webServer: {
