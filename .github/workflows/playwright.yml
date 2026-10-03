@@ -3,10 +3,13 @@ name: Playwright Tests
 on:
   schedule:
     - cron: '30 21 * * 1-5'  # Mon-Fri 8PM IST
+
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
+
   workflow_dispatch:
     inputs:
       environment:
@@ -62,11 +65,69 @@ jobs:
           key: reporting-labs-history-${{ github.event.inputs.environment || 'QA' }}-${{ github.run_id }}
           restore-keys: reporting-labs-history-${{ github.event.inputs.environment || 'QA' }}-
 
+      # Check whether GitHub Actions is receiving the required secrets.
+      # This does NOT print the actual secret values.
+      - name: Check environment variables
+        run: |
+          echo "ENV=$ENV"
+
+          if [ -n "$BASEURL" ]; then
+            echo "BASEURL is set"
+          else
+            echo "BASEURL is EMPTY"
+          fi
+
+          if [ -n "$API_BASE_URL" ]; then
+            echo "API_BASE_URL is set"
+          else
+            echo "API_BASE_URL is EMPTY"
+          fi
+
+          if [ -n "$API_TOKEN" ]; then
+            echo "API_TOKEN is set"
+          else
+            echo "API_TOKEN is EMPTY"
+          fi
+
+          if [ -n "$USERNAME" ]; then
+            echo "USERNAME is set"
+          else
+            echo "USERNAME is EMPTY"
+          fi
+
+          if [ -n "$PASSWORD" ]; then
+            echo "PASSWORD is set"
+          else
+            echo "PASSWORD is EMPTY"
+          fi
+
+          if [ -n "$OAUTH_CLIENT_ID" ]; then
+            echo "OAUTH_CLIENT_ID is set"
+          else
+            echo "OAUTH_CLIENT_ID is EMPTY"
+          fi
+
+          if [ -n "$OAUTH_CLIENT_SECRET" ]; then
+            echo "OAUTH_CLIENT_SECRET is set"
+          else
+            echo "OAUTH_CLIENT_SECRET is EMPTY"
+          fi
+
+        env:
+          ENV: ${{ github.event.inputs.environment || 'QA' }}
+          BASEURL: ${{ secrets.BASEURL }}
+          USERNAME: ${{ secrets.OPENCART_USERNAME }}
+          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
+
       - name: Run tests
         run: npx playwright test --project=chromium
         env:
           ENV: ${{ github.event.inputs.environment || 'QA' }}
-          BASE_URL: ${{ secrets.BASEURL }}
+          BASEURL: ${{ secrets.BASEURL }}
           USERNAME: ${{ secrets.OPENCART_USERNAME }}
           PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
