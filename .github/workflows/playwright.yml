@@ -77,6 +77,18 @@ jobs:
             echo "BASEURL is EMPTY"
           fi
 
+          if [ -n "$OPENCART_USERNAME" ]; then
+            echo "OPENCART_USERNAME is set"
+          else
+            echo "OPENCART_USERNAME is EMPTY"
+          fi
+
+          if [ -n "$OPENCART_PASSWORD" ]; then
+            echo "OPENCART_PASSWORD is set"
+          else
+            echo "OPENCART_PASSWORD is EMPTY"
+          fi
+
           if [ -n "$API_BASE_URL" ]; then
             echo "API_BASE_URL is set"
           else
@@ -87,18 +99,6 @@ jobs:
             echo "API_TOKEN is set"
           else
             echo "API_TOKEN is EMPTY"
-          fi
-
-          if [ -n "$USERNAME" ]; then
-            echo "USERNAME is set"
-          else
-            echo "USERNAME is EMPTY"
-          fi
-
-          if [ -n "$PASSWORD" ]; then
-            echo "PASSWORD is set"
-          else
-            echo "PASSWORD is EMPTY"
           fi
 
           if [ -n "$OAUTH_CLIENT_ID" ]; then
@@ -113,23 +113,30 @@ jobs:
             echo "OAUTH_CLIENT_SECRET is EMPTY"
           fi
 
+          if [ -n "$GRANT_TYPE" ]; then
+            echo "GRANT_TYPE is set"
+          else
+            echo "GRANT_TYPE is EMPTY"
+          fi
+
         env:
           ENV: ${{ github.event.inputs.environment || 'QA' }}
           BASEURL: ${{ secrets.BASEURL }}
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
+          GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
 
       - name: Run tests
         run: npx playwright test --project=chromium
         env:
           ENV: ${{ github.event.inputs.environment || 'QA' }}
           BASEURL: ${{ secrets.BASEURL }}
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
