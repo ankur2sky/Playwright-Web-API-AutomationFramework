@@ -5,7 +5,7 @@ let tokenId: string;
 
 // get token id
 
-test.beforeEach('get token id',async({ request })=>{
+test.beforeEach(' get token id',async({ request })=>{
 
     let creds = {
       "username" : "admin",
@@ -27,7 +27,7 @@ test.beforeEach('get token id',async({ request })=>{
     tokenId= jsonResponse.token;
 })
 
-    test('Booking crud with token', async({ request }) => {
+    test('@regression Booking crud with token', async({ request }) => {
 
 // create a new booking
 let bookingResponse = await request.post("https://restful-booker.herokuapp.com/booking",{

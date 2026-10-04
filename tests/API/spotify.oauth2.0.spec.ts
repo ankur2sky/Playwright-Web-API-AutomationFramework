@@ -35,7 +35,7 @@ accessToken=jsonResponse.access_token;
 })
 
 
-test('get albums data test',async({ request })=>{
+test('@regression get albums data test',async({ request })=>{
     
 let baseUrl = 'https://api.spotify.com';
 let endpointurl = '/v1/albums/4aawyAB9vmqN3uQ7FjRGTy';

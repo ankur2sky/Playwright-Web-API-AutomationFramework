@@ -29,7 +29,7 @@ async function createUser(apiHelper:any ) {
 }
 
 
-   test('Create a test user',async({ apiHelper})=>{
+   test('@regression Create a test user',async({ apiHelper})=>{
 
     await allure.suite("Login Tests");
     await allure.severity("critical");
@@ -46,7 +46,7 @@ async function createUser(apiHelper:any ) {
     })
 
 
-      test('Update a test user',async({ apiHelper})=>{
+      test('@smoke Update a test user',async({ apiHelper})=>{
       
       //1. Create a test user  
       let userResponse = await createUser(apiHelper);

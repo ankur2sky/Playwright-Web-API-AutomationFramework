@@ -9,18 +9,18 @@ test.beforeEach(async ({ loginPage}) =>{
 await loginPage.goToLoginPage();
 });
 
-test('login page title test',async({loginPage}) => {
+test('@smoke login page title test',async({loginPage}) => {
 let pageTitle = await loginPage.loginPageTitle();
 console.log('Login Page Title : ',pageTitle);
 expect(pageTitle).toBe('Account Login');
 
 });
 
-test('forgot password link exist or not',async({loginPage}) => {
+test('@regression forgot password link exist or not',async({loginPage}) => {
 expect(await loginPage.isForgottenPasswordLinkExist()).toBeTruthy();
 });
 
-test('User is able to login',async({loginPage,homePage}) => {
+test('@regression User is able to login',async({loginPage,homePage}) => {
 await loginPage.doLogin(process.env.OPENCART_USERNAME!,process.env.OPENCART_PASSWORD!);
 expect.soft(await homePage.isLogoutLinkexist()).toBeTruthy();
 expect.soft(await homePage.HomePageTitle()).toBe('My Account');
@@ -41,7 +41,7 @@ expect(await loginPage.isinValiderrorDisplayed()).toBeTruthy();
 // Read the excel data directly from XLSX file and loop the test data row wise
 let exceltestData = ExcelHelper.readExcel('testdata/opencartdata.xlsx','data')
 for (let row of exceltestData){
-test(`Login to app with invalid credential with excel data- ${row.username} - ${row.password}`
+test(`@ regression Login to app with invalid credential with excel data- ${row.username} - ${row.password}`
     ,async({loginPage,homePage}) =>{
 
 await loginPage.doLogin(row.username,row.password);
@@ -62,25 +62,25 @@ expect(await loginPage.isinValiderrorDisplayed()).toBeTruthy();
 
 //common features test
 
-test('App logo exist on Login Page',async({basePage})=>{
+test('@smoke App logo exist on Login Page',async({basePage})=>{
 
     expect(await basePage.isLogoVisible()).toBeTruthy();
 
 })
 
-test('Search box exist on Login Page', async({basePage})=>{
+test('@smoke Search box exist on Login Page', async({basePage})=>{
 
 expect(await basePage.isSearchBoxVisible()).toBeTruthy()
 
 })
 
-test('Cart exist on Login Page', async({basePage})=>{
+test('@smoke Cart exist on Login Page', async({basePage})=>{
 
 expect(await basePage.CartButtonVisible()).toBeTruthy();
 
 })
 
-test('Footer exist on login Page', async({basePage})=>{
+test('@smoke Footer exist on login Page', async({basePage})=>{
 expect(await basePage.getPageFooterscount()).toBe(16);
 
 })

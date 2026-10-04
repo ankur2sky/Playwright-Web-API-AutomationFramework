@@ -7,7 +7,7 @@ await loginPage.goToLoginPage();
 await loginPage.doLogin(process.env.OPENCART_USERNAME,process.env.OPENCART_PASSWORD);
 })
 
-test('home page title test',async({homePage})=>{
+test('@smoke home page title test',async({homePage})=>{
 let homePageTitle= await homePage.HomePageTitle();
 console.log(homePageTitle);
 expect(homePageTitle).toBe('My Account');
@@ -30,25 +30,25 @@ expect(await homePage.isLogoutLinkexist()).toBeTruthy();
 
  //common features test
 
-test('App logo exist on Login Page',async({basePage})=>{
+test('@smoke App logo exist on Login Page',async({basePage})=>{
 
     expect(await basePage.isLogoVisible()).toBeTruthy();
 
 })
 
-test('Search box exist on Login Page', async({basePage})=>{
+test('@smoke Search box exist on Login Page', async({basePage})=>{
 
 expect(await basePage.isSearchBoxVisible()).toBeTruthy()
 
 })
 
-test('Cart exist on Login Page', async({basePage})=>{
+test('@smoke Cart exist on Login Page', async({basePage})=>{
 
 expect(await basePage.CartButtonVisible()).toBeTruthy();
 
 })
 
-test('Footer exist on login Page', async({basePage})=>{
+test('@smoke Footer exist on login Page', async({basePage})=>{
 expect(await basePage.getPageFooterscount()).toBe(16);
 
 })
