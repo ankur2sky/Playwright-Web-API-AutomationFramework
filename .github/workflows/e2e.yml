@@ -1179,7 +1179,7 @@ jobs:
 
               <div class="reports">
 
-                <h3>[REPORT] View Reports (Click to Open)</h3>
+                <h3>View Reports (Click to Open)</h3>
 
                 <a class="report-link" href="${REPORT_URL}/index.html">[FOLDER] All Reports Dashboard</a>
 
@@ -1247,7 +1247,7 @@ jobs:
 
                       "type": "button",
 
-                      "text": { "type": "plain_text", "text": "[REPORT] View Reports" },
+                      "text": { "type": "plain_text", "text": "View Reports" },
 
                       "url": "${{ steps.status.outputs.report_url }}/index.html",
 
@@ -1259,7 +1259,7 @@ jobs:
 
                       "type": "button",
 
-                      "text": { "type": "plain_text", "text": "[FOLDER] GitHub Actions" },
+                      "text": { "type": "plain_text", "text": "GitHub Actions" },
 
                       "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
