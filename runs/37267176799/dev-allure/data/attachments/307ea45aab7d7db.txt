@@ -1,0 +1,3 @@
+User credential: testuser1234@test.com - test123
+search key:  macbook
+product name MacBook Air
