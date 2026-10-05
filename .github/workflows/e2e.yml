@@ -5689,7 +5689,7 @@ jobs:
 
 
 
-                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  *\\\\*\\\*Buil&#x64;*\\\\*\\\* — Maven Unit Test&#x73;\\n*\*${{ steps.status.outputs.dev }}  *\\\\*\\\*DE&#x56;*\\\\*\\\* — Sanity (@smoke)\\n*\*${{ steps.status.outputs.qa }}  *\\\\*\\\*Q&#x41;*\\\\*\\\* — Regression (All Tests)\\n*\*${{ steps.status.outputs.staging }}  *\\\\*\\\*Stagin&#x67;*\\\\*\\\* — Sanity (@smoke)\\n*\*${{ steps.status.outputs.prod }}  *\\\\*\\\*PRO&#x44;*\\\\*\\\* — Smoke (@smoke)" }
+                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  *Build* — Maven Unit Tests\n${{ steps.status.outputs.dev }}  *DEV* — Sanity (@smoke)\n${{ steps.status.outputs.qa }}  *QA* — Regression (All Tests)\n${{ steps.status.outputs.staging }}  *Staging* — Sanity (@smoke)\n${{ steps.status.outputs.prod }}  *PROD* — Smoke (@smoke)" }
 
 
 
