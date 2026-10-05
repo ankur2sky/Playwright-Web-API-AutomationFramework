@@ -1,0 +1,8 @@
+Json response {
+  access_token: 'BQDqECEHFLUhe2mcCO6InuFOCbI4-6ih11PFH50RgYbLsrmWxGRYb4v47ZYsCVBNtxc_vjk8qjfTd6WOtHh1_dhBVIFimX3z5JiZh5hrdgdPGaFQ779i0mT2mpjO25B8bmPKAV930C28',
+  token_type: 'Bearer',
+  expires_in: 3600
+}
+Promise { <pending> }
+18
+3

@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","899","@regression get albums data test","chromium","2026-10-05","passed","2026-10-05","","API/spotify.oauth2.0.spec.ts","",""
+"","5479","@regression @smoke Verify details on productInfo","chromium","2026-10-05","passed","2026-10-05","","Web/productInfoPage.spec.ts","",""
+"","3492","@regression User is able to login","chromium","2026-10-05","passed","2026-10-05","","Web/loginPageFixtures.spec.ts","",""
+"","184","@regression Booking crud with token","chromium","2026-10-05","passed","2026-10-05","","API/booking.api.spec.ts","",""
+"","2707","@regression forgot password link exist or not","chromium","2026-10-05","passed","2026-10-05","","Web/loginPageFixtures.spec.ts","",""
+"Verify user can login with valid credentials","1558","@regression Create a test user","chromium","2026-10-05","passed","2026-10-05","","Login Tests","",""

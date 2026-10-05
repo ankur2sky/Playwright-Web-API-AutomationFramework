@@ -1,0 +1,7 @@
+{
+  id: 8649854,
+  name: 'api tester',
+  email: 'api_automation_1791181581547@open.com',
+  gender: 'male',
+  status: 'active'
+} 200
