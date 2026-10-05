@@ -1,0 +1,13 @@
+User credential: testuser1234@test.com - test123
+search key:  macbook
+product name MacBook Air
+Map(8) {
+  'productHeader' => 'MacBook Air',
+  'productImagescount' => 4,
+  'Brand' => 'Apple',
+  'Product Code' => 'Product 17',
+  'Reward Points' => '700',
+  'Availability' => 'Out Of Stock',
+  'productPrice' => '$1,202.00',
+  'ExtTaxPrice' => '$1,000.00'
+}
