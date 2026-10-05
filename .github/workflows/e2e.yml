@@ -5681,46 +5681,6 @@ jobs:
 
 
 
-                  "type": "section",
-
-
-
-
-
-
-
-                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  *Build* — Maven Unit Tests\n${{ steps.status.outputs.dev }}  *DEV* — Sanity (@smoke)\n${{ steps.status.outputs.qa }}  *QA* — Regression (All Tests)\n${{ steps.status.outputs.staging }}  *Staging* — Sanity (@smoke)\n${{ steps.status.outputs.prod }}  *PROD* — Smoke (@smoke)" }
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-                { "type": "divider" },
-
-
-
-
-
-
-
-                {
-
-
-
-
-
-
-
                   "type": "actions",
 
 
