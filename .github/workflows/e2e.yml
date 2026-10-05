@@ -1,40 +1,3 @@
-# ═══════════════════════════════════════════════════════════════
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ═══════════════════════════════════════════════════════════════
-
-
-
-
-
-
-
 # "Run up to environment" — the dropdown controls how far the
 
 
@@ -83,7 +46,6 @@
 
 
 
-# ═══════════════════════════════════════════════════════════════
 
 
 
@@ -239,7 +201,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -263,7 +224,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -311,7 +271,7 @@ jobs:
 
 
 
-        uses: actions/checkout\@v4
+        uses: actions/checkout@v4
 
 
 
@@ -351,7 +311,7 @@ jobs:
 
 
 
-        uses: actions/setup-java\@v4
+        uses: actions/setup-java@v4
 
 
 
@@ -471,7 +431,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -519,7 +479,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -543,7 +502,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -671,7 +629,7 @@ jobs:
 
 
 
-        uses: actions/checkout\@v4
+        uses: actions/checkout@v4
 
 
 
@@ -711,7 +669,7 @@ jobs:
 
 
 
-        uses: actions/setup-node\@v4
+        uses: actions/setup-node@v4
 
 
 
@@ -767,7 +725,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -783,7 +741,7 @@ jobs:
 
 
 
-          path: \\\\~/.cache/ms-playwright
+          path: \\\~/.cache/ms-playwright
 
 
 
@@ -903,7 +861,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -1151,7 +1109,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -1215,7 +1173,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -1279,7 +1237,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -1327,7 +1285,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -1351,7 +1308,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -1495,7 +1451,7 @@ jobs:
 
 
 
-        uses: actions/checkout\@v4
+        uses: actions/checkout@v4
 
 
 
@@ -1535,7 +1491,7 @@ jobs:
 
 
 
-        uses: actions/setup-node\@v4
+        uses: actions/setup-node@v4
 
 
 
@@ -1591,7 +1547,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -1607,7 +1563,7 @@ jobs:
 
 
 
-          path: \\\\~/.cache/ms-playwright
+          path: \\\~/.cache/ms-playwright
 
 
 
@@ -1727,7 +1683,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -1975,7 +1931,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2039,7 +1995,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2103,7 +2059,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2151,7 +2107,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -2175,7 +2130,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -2319,7 +2273,7 @@ jobs:
 
 
 
-        uses: actions/checkout\@v4
+        uses: actions/checkout@v4
 
 
 
@@ -2359,7 +2313,7 @@ jobs:
 
 
 
-        uses: actions/setup-node\@v4
+        uses: actions/setup-node@v4
 
 
 
@@ -2415,7 +2369,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -2431,7 +2385,7 @@ jobs:
 
 
 
-          path: \\\\~/.cache/ms-playwright
+          path: \\\~/.cache/ms-playwright
 
 
 
@@ -2551,7 +2505,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -2799,7 +2753,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2863,7 +2817,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2927,7 +2881,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -2975,7 +2929,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -2999,7 +2952,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -3151,7 +3103,7 @@ jobs:
 
 
 
-        uses: actions/checkout\@v4
+        uses: actions/checkout@v4
 
 
 
@@ -3191,7 +3143,7 @@ jobs:
 
 
 
-        uses: actions/setup-node\@v4
+        uses: actions/setup-node@v4
 
 
 
@@ -3247,7 +3199,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -3263,7 +3215,7 @@ jobs:
 
 
 
-          path: \\\\~/.cache/ms-playwright
+          path: \\\~/.cache/ms-playwright
 
 
 
@@ -3383,7 +3335,7 @@ jobs:
 
 
 
-        uses: actions/cache\@v4
+        uses: actions/cache@v4
 
 
 
@@ -3631,7 +3583,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -3695,7 +3647,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -3759,7 +3711,7 @@ jobs:
 
 
 
-        uses: actions/upload-artifact\@v4
+        uses: actions/upload-artifact@v4
 
 
 
@@ -3807,7 +3759,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -3831,7 +3782,6 @@ jobs:
 
 
 
-  # ═════════════════════════════════════════════════════
 
 
 
@@ -4199,7 +4149,7 @@ jobs:
 
 
 
-        uses: actions/download-artifact\@v4
+        uses: actions/download-artifact@v4
 
 
 
@@ -4279,7 +4229,7 @@ jobs:
 
 
 
-          \<!DOCTYPE html>
+          <!DOCTYPE html>
 
 
 
@@ -4287,7 +4237,7 @@ jobs:
 
 
 
-          \<html>
+          <html>
 
 
 
@@ -4295,7 +4245,7 @@ jobs:
 
 
 
-          \<head>
+          <head>
 
 
 
@@ -4303,7 +4253,7 @@ jobs:
 
 
 
-            \<title>Pipeline Reports — Run RUN_ID\</title>
+            <title>Pipeline Reports — Run RUN_ID</title>
 
 
 
@@ -4311,7 +4261,7 @@ jobs:
 
 
 
-            \<style>
+            <style>
 
 
 
@@ -4439,7 +4389,7 @@ jobs:
 
 
 
-            \</style>
+            </style>
 
 
 
@@ -4447,7 +4397,7 @@ jobs:
 
 
 
-          \</head>
+          </head>
 
 
 
@@ -4455,7 +4405,7 @@ jobs:
 
 
 
-          \<body>
+          <body>
 
 
 
@@ -4463,7 +4413,7 @@ jobs:
 
 
 
-            \<div class="container">
+            <div class="container">
 
 
 
@@ -4471,7 +4421,7 @@ jobs:
 
 
 
-              \<h1>🎭 Pipeline Reports \<span class="env-tag tag-selected">ENV_SELECTED\</span>\</h1>
+              <h1>🎭 Pipeline Reports <span class="env-tag tag-selected">ENV_SELECTED</span></h1>
 
 
 
@@ -4479,7 +4429,7 @@ jobs:
 
 
 
-              \<p class="meta">Run ID: RUN_ID | Branch: BRANCH | Date: RUN_DATE\</p>
+              <p class="meta">Run ID: RUN_ID | Branch: BRANCH | Date: RUN_DATE</p>
 
 
 
@@ -4495,7 +4445,7 @@ jobs:
 
 
 
-              \<div class="card">
+              <div class="card">
 
 
 
@@ -4503,7 +4453,7 @@ jobs:
 
 
 
-                \<h2>🟢 DEV — Sanity\</h2>
+                <h2>🟢 DEV — Sanity</h2>
 
 
 
@@ -4511,7 +4461,7 @@ jobs:
 
 
 
-                \<div class="links">
+                <div class="links">
 
 
 
@@ -4519,7 +4469,7 @@ jobs:
 
 
 
-                  \<a class="btn html-btn" href="dev-html/index.html">📊 HTML Report\</a>
+                  <a class="btn html-btn" href="dev-html/index.html">📊 HTML Report</a>
 
 
 
@@ -4527,7 +4477,7 @@ jobs:
 
 
 
-                  \<a class="btn allure-btn" href="dev-allure/index.html">📈 Allure Report\</a>
+                  <a class="btn allure-btn" href="dev-allure/index.html">📈 Allure Report</a>
 
 
 
@@ -4535,7 +4485,7 @@ jobs:
 
 
 
-                  \<a class="btn rlabs-btn" href="dev-rlabs/index.html">🧪 ReportingLabs\</a>
+                  <a class="btn rlabs-btn" href="dev-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
@@ -4543,7 +4493,7 @@ jobs:
 
 
 
-                \</div>
+                </div>
 
 
 
@@ -4551,7 +4501,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -4567,7 +4517,7 @@ jobs:
 
 
 
-              \<div class="card" id="qa-card">
+              <div class="card" id="qa-card">
 
 
 
@@ -4575,7 +4525,7 @@ jobs:
 
 
 
-                \<h2>🔵 QA — Regression\</h2>
+                <h2>🔵 QA — Regression</h2>
 
 
 
@@ -4583,7 +4533,7 @@ jobs:
 
 
 
-                \<div class="links">
+                <div class="links">
 
 
 
@@ -4591,7 +4541,7 @@ jobs:
 
 
 
-                  \<a class="btn html-btn" href="qa-html/index.html">📊 HTML Report\</a>
+                  <a class="btn html-btn" href="qa-html/index.html">📊 HTML Report</a>
 
 
 
@@ -4599,7 +4549,7 @@ jobs:
 
 
 
-                  \<a class="btn allure-btn" href="qa-allure/index.html">📈 Allure Report\</a>
+                  <a class="btn allure-btn" href="qa-allure/index.html">📈 Allure Report</a>
 
 
 
@@ -4607,7 +4557,7 @@ jobs:
 
 
 
-                  \<a class="btn rlabs-btn" href="qa-rlabs/index.html">🧪 ReportingLabs\</a>
+                  <a class="btn rlabs-btn" href="qa-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
@@ -4615,7 +4565,7 @@ jobs:
 
 
 
-                \</div>
+                </div>
 
 
 
@@ -4623,7 +4573,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -4639,7 +4589,7 @@ jobs:
 
 
 
-              \<div class="card" id="Staging-card">
+              <div class="card" id="Staging-card">
 
 
 
@@ -4647,7 +4597,7 @@ jobs:
 
 
 
-                \<h2>🟡 Staging — Sanity\</h2>
+                <h2>🟡 Staging — Sanity</h2>
 
 
 
@@ -4655,7 +4605,7 @@ jobs:
 
 
 
-                \<div class="links">
+                <div class="links">
 
 
 
@@ -4663,7 +4613,7 @@ jobs:
 
 
 
-                  \<a class="btn html-btn" href="Staging-html/index.html">📊 HTML Report\</a>
+                  <a class="btn html-btn" href="Staging-html/index.html">📊 HTML Report</a>
 
 
 
@@ -4671,7 +4621,7 @@ jobs:
 
 
 
-                  \<a class="btn allure-btn" href="Staging-allure/index.html">📈 Allure Report\</a>
+                  <a class="btn allure-btn" href="Staging-allure/index.html">📈 Allure Report</a>
 
 
 
@@ -4679,7 +4629,7 @@ jobs:
 
 
 
-                  \<a class="btn rlabs-btn" href="Staging-rlabs/index.html">🧪 ReportingLabs\</a>
+                  <a class="btn rlabs-btn" href="Staging-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
@@ -4687,7 +4637,7 @@ jobs:
 
 
 
-                \</div>
+                </div>
 
 
 
@@ -4695,7 +4645,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -4711,7 +4661,7 @@ jobs:
 
 
 
-              \<div class="card" id="prod-card">
+              <div class="card" id="prod-card">
 
 
 
@@ -4719,7 +4669,7 @@ jobs:
 
 
 
-                \<h2>🔴 PROD — Smoke\</h2>
+                <h2>🔴 PROD — Smoke</h2>
 
 
 
@@ -4727,7 +4677,7 @@ jobs:
 
 
 
-                \<div class="links">
+                <div class="links">
 
 
 
@@ -4735,7 +4685,7 @@ jobs:
 
 
 
-                  \<a class="btn html-btn" href="prod-html/index.html">📊 HTML Report\</a>
+                  <a class="btn html-btn" href="prod-html/index.html">📊 HTML Report</a>
 
 
 
@@ -4743,7 +4693,7 @@ jobs:
 
 
 
-                  \<a class="btn allure-btn" href="prod-allure/index.html">📈 Allure Report\</a>
+                  <a class="btn allure-btn" href="prod-allure/index.html">📈 Allure Report</a>
 
 
 
@@ -4751,7 +4701,7 @@ jobs:
 
 
 
-                  \<a class="btn rlabs-btn" href="prod-rlabs/index.html">🧪 ReportingLabs\</a>
+                  <a class="btn rlabs-btn" href="prod-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
@@ -4759,7 +4709,7 @@ jobs:
 
 
 
-                \</div>
+                </div>
 
 
 
@@ -4767,7 +4717,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -4775,7 +4725,7 @@ jobs:
 
 
 
-            \</div>
+            </div>
 
 
 
@@ -4783,7 +4733,7 @@ jobs:
 
 
 
-          \</body>
+          </body>
 
 
 
@@ -4791,7 +4741,7 @@ jobs:
 
 
 
-          \</html>
+          </html>
 
 
 
@@ -4999,7 +4949,7 @@ jobs:
 
 
 
-        uses: peaceiris/actions-gh-pages\@v4
+        uses: peaceiris/actions-gh-pages@v4
 
 
 
@@ -5087,7 +5037,7 @@ jobs:
 
 
 
-          \<!DOCTYPE html>
+          <!DOCTYPE html>
 
 
 
@@ -5095,7 +5045,7 @@ jobs:
 
 
 
-          \<html>
+          <html>
 
 
 
@@ -5103,7 +5053,7 @@ jobs:
 
 
 
-          \<head>
+          <head>
 
 
 
@@ -5111,7 +5061,7 @@ jobs:
 
 
 
-            \<style>
+            <style>
 
 
 
@@ -5295,7 +5245,7 @@ jobs:
 
 
 
-            \</style>
+            </style>
 
 
 
@@ -5303,7 +5253,7 @@ jobs:
 
 
 
-          \</head>
+          </head>
 
 
 
@@ -5311,7 +5261,7 @@ jobs:
 
 
 
-          \<body>
+          <body>
 
 
 
@@ -5319,7 +5269,7 @@ jobs:
 
 
 
-            \<div class="container">
+            <div class="container">
 
 
 
@@ -5327,7 +5277,7 @@ jobs:
 
 
 
-              \<div class="header">
+              <div class="header">
 
 
 
@@ -5335,7 +5285,7 @@ jobs:
 
 
 
-                \<h1>🎭 Playwright CI/CD Dashboard\</h1>
+                <h1>🎭 Playwright CI/CD Dashboard</h1>
 
 
 
@@ -5343,7 +5293,7 @@ jobs:
 
 
 
-                \<p>Master Pipeline Report — Run up to: \<span class="env-badge">${{ github.event.inputs.environment }}\</span>\</p>
+                <p>Master Pipeline Report — Run up to: <span class="env-badge">${{ github.event.inputs.environment }}</span></p>
 
 
 
@@ -5351,7 +5301,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -5359,7 +5309,7 @@ jobs:
 
 
 
-              \<div class="body">
+              <div class="body">
 
 
 
@@ -5367,7 +5317,7 @@ jobs:
 
 
 
-                \<div class="meta">
+                <div class="meta">
 
 
 
@@ -5375,7 +5325,7 @@ jobs:
 
 
 
-                  \<span>🔀 Branch: \<strong>${{ github.ref_name }}\</strong>\</span>
+                  <span>🔀 Branch: <strong>${{ github.ref_name }}</strong></span>
 
 
 
@@ -5383,7 +5333,7 @@ jobs:
 
 
 
-                  \<span>👤 ${{ github.actor }}\</span>
+                  <span>👤 ${{ github.actor }}</span>
 
 
 
@@ -5391,7 +5341,7 @@ jobs:
 
 
 
-                \</div>
+                </div>
 
 
 
@@ -5399,7 +5349,7 @@ jobs:
 
 
 
-                \<table>
+                <table>
 
 
 
@@ -5407,7 +5357,7 @@ jobs:
 
 
 
-                  \<tr>\<th>Environment\</th>\<th>Test Suite\</th>\<th>Status\</th>\</tr>
+                  <tr><th>Environment</th><th>Test Suite</th><th>Status</th></tr>
 
 
 
@@ -5415,7 +5365,7 @@ jobs:
 
 
 
-                  \<tr>\<td class="env-name">🔨 Build\</td>\<td class="test-type">Maven Unit Tests\</td>\<td class="status">${{ steps.status.outputs.build }}\</td>\</tr>
+                  <tr><td class="env-name">🔨 Build</td><td class="test-type">Maven Unit Tests</td><td class="status">${{ steps.status.outputs.build }}</td></tr>
 
 
 
@@ -5423,7 +5373,7 @@ jobs:
 
 
 
-                  \<tr>\<td class="env-name">🟢 DEV\</td>\<td class="test-type">Sanity (@smoke)\</td>\<td class="status">${{ steps.status.outputs.dev }}\</td>\</tr>
+                  <tr><td class="env-name">🟢 DEV</td><td class="test-type">Sanity (@smoke)</td><td class="status">${{ steps.status.outputs.dev }}</td></tr>
 
 
 
@@ -5431,7 +5381,7 @@ jobs:
 
 
 
-                  \<tr>\<td class="env-name">🔵 QA\</td>\<td class="test-type">Regression (All Tests)\</td>\<td class="status">${{ steps.status.outputs.qa }}\</td>\</tr>
+                  <tr><td class="env-name">🔵 QA</td><td class="test-type">Regression (All Tests)</td><td class="status">${{ steps.status.outputs.qa }}</td></tr>
 
 
 
@@ -5439,7 +5389,7 @@ jobs:
 
 
 
-                  \<tr>\<td class="env-name">🟡 Staging\</td>\<td class="test-type">Sanity (@smoke)\</td>\<td class="status">${{ steps.status.outputs.staging }}\</td>\</tr>
+                  <tr><td class="env-name">🟡 Staging</td><td class="test-type">Sanity (@smoke)</td><td class="status">${{ steps.status.outputs.staging }}</td></tr>
 
 
 
@@ -5447,7 +5397,7 @@ jobs:
 
 
 
-                  \<tr>\<td class="env-name">🔴 PROD\</td>\<td class="test-type">Smoke (@smoke)\</td>\<td class="status">${{ steps.status.outputs.prod }}\</td>\</tr>
+                  <tr><td class="env-name">🔴 PROD</td><td class="test-type">Smoke (@smoke)</td><td class="status">${{ steps.status.outputs.prod }}</td></tr>
 
 
 
@@ -5455,7 +5405,7 @@ jobs:
 
 
 
-                \</table>
+                </table>
 
 
 
@@ -5463,7 +5413,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -5471,7 +5421,7 @@ jobs:
 
 
 
-              \<div class="reports">
+              <div class="reports">
 
 
 
@@ -5479,7 +5429,7 @@ jobs:
 
 
 
-                \<h3>📊 View Reports (Click to Open)\</h3>
+                <h3>📊 View Reports (Click to Open)</h3>
 
 
 
@@ -5487,7 +5437,7 @@ jobs:
 
 
 
-                \<a class="report-link" href="${REPORT_URL}/index.html">📁 All Reports Dashboard\</a>
+                <a class="report-link" href="${REPORT_URL}/index.html">📁 All Reports Dashboard</a>
 
 
 
@@ -5495,7 +5445,7 @@ jobs:
 
 
 
-                \<a class="report-link green" href="${REPORT_URL}/qa-html/index.html">📊 QA HTML Report\</a>
+                <a class="report-link green" href="${REPORT_URL}/qa-html/index.html">📊 QA HTML Report</a>
 
 
 
@@ -5503,7 +5453,7 @@ jobs:
 
 
 
-                \<a class="report-link green" href="${REPORT_URL}/qa-allure/index.html">📈 QA Allure Report\</a>
+                <a class="report-link green" href="${REPORT_URL}/qa-allure/index.html">📈 QA Allure Report</a>
 
 
 
@@ -5511,7 +5461,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -5519,7 +5469,7 @@ jobs:
 
 
 
-              \<div class="footer">
+              <div class="footer">
 
 
 
@@ -5535,7 +5485,7 @@ jobs:
 
 
 
-              \</div>
+              </div>
 
 
 
@@ -5543,7 +5493,7 @@ jobs:
 
 
 
-            \</div>
+            </div>
 
 
 
@@ -5551,7 +5501,7 @@ jobs:
 
 
 
-          \</body>
+          </body>
 
 
 
@@ -5559,7 +5509,7 @@ jobs:
 
 
 
-          \</html>
+          </html>
 
 
 
@@ -5603,7 +5553,7 @@ jobs:
 
 
 
-        uses: 8398a7/action-slack\@v3
+        uses: 8398a7/action-slack@v3
 
 
 
@@ -5699,7 +5649,7 @@ jobs:
 
 
 
-                  "text": { "type": "mrkdwn", "text": "*\\\\*\\\*Overall: ${{ steps.status.outputs.overall }}*\\\\\\\\*&#x6E;\\\\\*\\\*Run up to:*\\\\*\\\* *\\\\*\\\`${{ github.event.inputs.environment }}*\\\\*\\\`\\n\n*\\\\\*\\\*Branch:*\\\\*\\\* *\\\\*\\\`${{ github.ref_name }}*\\\\*\\\`  |  *\\\\*\\\*Triggered by:*\\\\*\\\* *\\\\*\\\`${{ github.actor }}*\\\\***\\\`" }
+                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  *Build* — Maven Unit Tests\n${{ steps.status.outputs.dev }}  *DEV* — Sanity (@smoke)\n${{ steps.status.outputs.qa }}  *QA* — Regression (All Tests)\n${{ steps.status.outputs.staging }}  *Staging* — Sanity (@smoke)\n${{ steps.status.outputs.prod }}  *PROD* — Smoke (@smoke)" }
 
 
 
