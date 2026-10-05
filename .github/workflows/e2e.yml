@@ -2,19 +2,36 @@
 
 
 
-# FILE: .github/workflows/master-pipeline.yml
 
 
 
-# REPO: ankur2sky/OpenCartWebAPIAutomationFramework
 
 
 
-# DEV REPO: jglick/simple-maven-project-with-tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 # ═══════════════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -22,7 +39,15 @@
 
 
 
+
+
+
+
 # pipeline goes:
+
+
+
+
 
 
 
@@ -30,7 +55,15 @@
 
 
 
+
+
+
+
 #   QA    → Build → DEV → QA
+
+
+
+
 
 
 
@@ -38,11 +71,27 @@
 
 
 
+
+
+
+
 #   Prod  → Build → DEV → QA → Staging → PROD
 
 
 
+
+
+
+
 # ═══════════════════════════════════════════════════════════════
+
+
+
+
+
+
+
+
 
 
 
@@ -58,7 +107,19 @@ name: e2e CI/CD Pipeline
 
 
 
+
+
+
+
+
+
+
+
 on:
+
+
+
+
 
 
 
@@ -66,7 +127,15 @@ on:
 
 
 
+
+
+
+
     inputs:
+
+
+
+
 
 
 
@@ -74,7 +143,15 @@ on:
 
 
 
+
+
+
+
         description: 'Run up to environment'
+
+
+
+
 
 
 
@@ -82,7 +159,15 @@ on:
 
 
 
+
+
+
+
         default: 'QA'
+
+
+
+
 
 
 
@@ -90,7 +175,15 @@ on:
 
 
 
+
+
+
+
         options:
+
+
+
+
 
 
 
@@ -98,13 +191,31 @@ on:
 
 
 
+
+
+
+
           - QA
+
+
+
+
 
 
 
           - Staging
 
+
+
           - Prod
+
+
+
+
+
+
+
+
 
 
 
@@ -120,7 +231,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -128,7 +251,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Always runs
+
+
+
+
 
 
 
@@ -136,7 +267,15 @@ jobs:
 
 
 
+
+
+
+
   build:
+
+
+
+
 
 
 
@@ -144,7 +283,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -152,7 +299,15 @@ jobs:
 
 
 
+
+
+
+
       - name: Checkout DEV repo
+
+
+
+
 
 
 
@@ -160,7 +315,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -172,7 +335,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Setup Java
+
+
+
+
 
 
 
@@ -180,7 +355,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -188,7 +371,15 @@ jobs:
 
 
 
+
+
+
+
           java-version: '17'
+
+
+
+
 
 
 
@@ -200,7 +391,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Build & Run Unit Tests
+
+
+
+
 
 
 
@@ -208,7 +411,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -216,7 +427,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -228,7 +447,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Upload Unit Test Results
+
+
+
+
 
 
 
@@ -236,7 +467,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/upload-artifact\@v4
+
+
+
+
 
 
 
@@ -244,11 +483,23 @@ jobs:
 
 
 
+
+
+
+
           name: unit-test-results
 
 
 
+
+
+
+
           path: target/surefire-reports/
+
+
+
+
 
 
 
@@ -260,7 +511,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -268,7 +531,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Always runs (every option includes DEV)
+
+
+
+
 
 
 
@@ -276,7 +547,15 @@ jobs:
 
 
 
+
+
+
+
   deploy-dev:
+
+
+
+
 
 
 
@@ -284,7 +563,15 @@ jobs:
 
 
 
+
+
+
+
     needs: build
+
+
+
+
 
 
 
@@ -292,11 +579,23 @@ jobs:
 
 
 
+
+
+
+
     steps:
 
 
 
+
+
+
+
       - name: Deploy to DEV
+
+
+
+
 
 
 
@@ -308,7 +607,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   sanity-dev:
+
+
+
+
 
 
 
@@ -316,7 +627,15 @@ jobs:
 
 
 
+
+
+
+
     needs: deploy-dev
+
+
+
+
 
 
 
@@ -324,7 +643,15 @@ jobs:
 
 
 
+
+
+
+
     environment: DEV
+
+
+
+
 
 
 
@@ -332,7 +659,15 @@ jobs:
 
 
 
+
+
+
+
       - name: Checkout QA repo
+
+
+
+
 
 
 
@@ -340,7 +675,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -352,7 +695,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Setup Node.js
+
+
+
+
 
 
 
@@ -360,11 +715,23 @@ jobs:
 
 
 
+
+
+
+
         with:
 
 
 
+
+
+
+
           node-version: 24
+
+
+
+
 
 
 
@@ -376,7 +743,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Cache Playwright browsers
+
+
+
+
 
 
 
@@ -384,7 +763,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/cache\@v4
+
+
+
+
 
 
 
@@ -392,7 +779,15 @@ jobs:
 
 
 
-          path: \\~/.cache/ms-playwright
+
+
+
+
+          path: \\\\~/.cache/ms-playwright
+
+
+
+
 
 
 
@@ -404,7 +799,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install dependencies
+
+
+
+
 
 
 
@@ -416,11 +823,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright browsers
 
 
 
+
+
+
+
         if: steps.pw-cache-dev.outputs.cache-hit != 'true'
+
+
+
+
 
 
 
@@ -432,11 +855,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright OS deps only
 
 
 
+
+
+
+
         if: steps.pw-cache-dev.outputs.cache-hit == 'true'
+
+
+
+
 
 
 
@@ -448,7 +887,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Restore reportingLabs history
+
+
+
+
 
 
 
@@ -456,7 +907,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -464,7 +923,15 @@ jobs:
 
 
 
+
+
+
+
           key: reporting-labs-history-dev-${{ github.run_id }}
+
+
+
+
 
 
 
@@ -476,7 +943,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Run Sanity Tests on DEV
+
+
+
+
 
 
 
@@ -484,7 +963,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -492,7 +979,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -500,27 +995,55 @@ jobs:
 
 
 
+
+
+
+
         env:
 
 
 
-          ENV: dev
 
 
 
-          BASE_URL: ${{ secrets.BASEURL }}
+
+          ENV: DEV
 
 
 
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
 
 
 
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+          BASEURL: ${{ vars.BASEURL }}
 
 
 
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+
+
+
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+
+
+
+
+
+
+
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+
+
+
+
+
+
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+
+
+
+
 
 
 
@@ -528,7 +1051,15 @@ jobs:
 
 
 
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+
+
+
+
+          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
+
+
+
+
 
 
 
@@ -536,7 +1067,19 @@ jobs:
 
 
 
-          GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
+
+
+
+
+          GRANT_TYPE: ${{ vars.GRANT_TYPE }}
+
+
+
+
+
+
+
+
 
 
 
@@ -548,7 +1091,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -556,11 +1107,27 @@ jobs:
 
 
 
+
+
+
+
           npm install -g allure-commandline
 
 
 
+
+
+
+
           allure generate allure-results --clean -o allure-report
+
+
+
+
+
+
+
+
 
 
 
@@ -572,7 +1139,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -580,7 +1155,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -588,11 +1171,27 @@ jobs:
 
 
 
+
+
+
+
           path: reports/html-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -604,7 +1203,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -612,7 +1219,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -620,11 +1235,27 @@ jobs:
 
 
 
+
+
+
+
           path: allure-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -636,7 +1267,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -644,7 +1283,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -652,7 +1299,15 @@ jobs:
 
 
 
+
+
+
+
           path: reporting-labs/
+
+
+
+
 
 
 
@@ -664,7 +1319,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -672,7 +1339,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Runs when: QA, Staging, or Prod
+
+
+
+
 
 
 
@@ -680,7 +1355,15 @@ jobs:
 
 
 
+
+
+
+
   deploy-qa:
+
+
+
+
 
 
 
@@ -688,7 +1371,15 @@ jobs:
 
 
 
+
+
+
+
     needs: sanity-dev
+
+
+
+
 
 
 
@@ -696,7 +1387,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -704,7 +1403,15 @@ jobs:
 
 
 
+
+
+
+
       - name: Deploy to QA
+
+
+
+
 
 
 
@@ -716,7 +1423,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   regression-qa:
+
+
+
+
 
 
 
@@ -724,7 +1443,15 @@ jobs:
 
 
 
+
+
+
+
     needs: deploy-qa
+
+
+
+
 
 
 
@@ -732,7 +1459,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -740,7 +1475,15 @@ jobs:
 
 
 
+
+
+
+
     steps:
+
+
+
+
 
 
 
@@ -748,11 +1491,23 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/checkout\@v4
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -764,7 +1519,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Setup Node.js
+
+
+
+
 
 
 
@@ -772,11 +1539,23 @@ jobs:
 
 
 
+
+
+
+
         with:
 
 
 
+
+
+
+
           node-version: 24
+
+
+
+
 
 
 
@@ -788,7 +1567,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Cache Playwright browsers
+
+
+
+
 
 
 
@@ -796,7 +1587,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/cache\@v4
+
+
+
+
 
 
 
@@ -804,7 +1603,15 @@ jobs:
 
 
 
-          path: \\~/.cache/ms-playwright
+
+
+
+
+          path: \\\\~/.cache/ms-playwright
+
+
+
+
 
 
 
@@ -816,7 +1623,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install dependencies
+
+
+
+
 
 
 
@@ -828,11 +1647,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright browsers
 
 
 
+
+
+
+
         if: steps.pw-cache-qa.outputs.cache-hit != 'true'
+
+
+
+
 
 
 
@@ -844,11 +1679,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright OS deps only
 
 
 
+
+
+
+
         if: steps.pw-cache-qa.outputs.cache-hit == 'true'
+
+
+
+
 
 
 
@@ -860,7 +1711,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Restore reportingLabs history
+
+
+
+
 
 
 
@@ -868,7 +1731,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -876,7 +1747,15 @@ jobs:
 
 
 
+
+
+
+
           key: reporting-labs-history-qa-${{ github.run_id }}
+
+
+
+
 
 
 
@@ -888,7 +1767,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Run Regression Tests on QA
+
+
+
+
 
 
 
@@ -896,7 +1787,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -904,7 +1803,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -912,27 +1819,55 @@ jobs:
 
 
 
+
+
+
+
         env:
 
 
 
-          ENV: qa
 
 
 
-          BASE_URL: ${{ secrets.BASEURL }}
+
+          ENV: QA
 
 
 
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
 
 
 
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+          BASEURL: ${{ vars.BASEURL }}
 
 
 
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+
+
+
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+
+
+
+
+
+
+
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+
+
+
+
+
+
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+
+
+
+
 
 
 
@@ -940,7 +1875,15 @@ jobs:
 
 
 
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+
+
+
+
+          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
+
+
+
+
 
 
 
@@ -948,7 +1891,19 @@ jobs:
 
 
 
-          GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
+
+
+
+
+          GRANT_TYPE: ${{ vars.GRANT_TYPE }}
+
+
+
+
+
+
+
+
 
 
 
@@ -960,7 +1915,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -968,11 +1931,27 @@ jobs:
 
 
 
+
+
+
+
           npm install -g allure-commandline
 
 
 
+
+
+
+
           allure generate allure-results --clean -o allure-report
+
+
+
+
+
+
+
+
 
 
 
@@ -984,7 +1963,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -992,7 +1979,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1000,11 +1995,27 @@ jobs:
 
 
 
+
+
+
+
           path: reports/html-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1016,7 +2027,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1024,7 +2043,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1032,11 +2059,27 @@ jobs:
 
 
 
+
+
+
+
           path: allure-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1048,7 +2091,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1056,7 +2107,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1064,7 +2123,15 @@ jobs:
 
 
 
+
+
+
+
           path: reporting-labs/
+
+
+
+
 
 
 
@@ -1076,7 +2143,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -1084,7 +2163,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Runs when: Staging or Prod
+
+
+
+
 
 
 
@@ -1092,7 +2179,15 @@ jobs:
 
 
 
+
+
+
+
   deploy-staging:
+
+
+
+
 
 
 
@@ -1100,7 +2195,15 @@ jobs:
 
 
 
+
+
+
+
     needs: regression-qa
+
+
+
+
 
 
 
@@ -1108,7 +2211,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -1116,7 +2227,15 @@ jobs:
 
 
 
+
+
+
+
       - name: Deploy to Staging
+
+
+
+
 
 
 
@@ -1128,7 +2247,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   sanity-staging:
+
+
+
+
 
 
 
@@ -1136,7 +2267,15 @@ jobs:
 
 
 
+
+
+
+
     needs: deploy-staging
+
+
+
+
 
 
 
@@ -1144,7 +2283,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -1152,7 +2299,15 @@ jobs:
 
 
 
+
+
+
+
     steps:
+
+
+
+
 
 
 
@@ -1160,11 +2315,23 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/checkout\@v4
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1176,7 +2343,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Setup Node.js
+
+
+
+
 
 
 
@@ -1184,11 +2363,23 @@ jobs:
 
 
 
+
+
+
+
         with:
 
 
 
+
+
+
+
           node-version: 24
+
+
+
+
 
 
 
@@ -1200,7 +2391,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Cache Playwright browsers
+
+
+
+
 
 
 
@@ -1208,7 +2411,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/cache\@v4
+
+
+
+
 
 
 
@@ -1216,7 +2427,15 @@ jobs:
 
 
 
-          path: \\~/.cache/ms-playwright
+
+
+
+
+          path: \\\\~/.cache/ms-playwright
+
+
+
+
 
 
 
@@ -1228,7 +2447,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install dependencies
+
+
+
+
 
 
 
@@ -1240,11 +2471,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright browsers
 
 
 
+
+
+
+
         if: steps.pw-cache-Staging.outputs.cache-hit != 'true'
+
+
+
+
 
 
 
@@ -1256,11 +2503,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright OS deps only
 
 
 
+
+
+
+
         if: steps.pw-cache-Staging.outputs.cache-hit == 'true'
+
+
+
+
 
 
 
@@ -1272,7 +2535,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Restore reportingLabs history
+
+
+
+
 
 
 
@@ -1280,7 +2555,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1288,7 +2571,15 @@ jobs:
 
 
 
+
+
+
+
           key: reporting-labs-history-Staging-${{ github.run_id }}
+
+
+
+
 
 
 
@@ -1300,7 +2591,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Run Sanity Tests on Staging
+
+
+
+
 
 
 
@@ -1308,7 +2611,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -1316,7 +2627,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -1324,27 +2643,55 @@ jobs:
 
 
 
+
+
+
+
         env:
 
 
 
-          ENV: stage
 
 
 
-          BASE_URL: ${{ secrets.BASEURL }}
+
+          ENV: Staging
 
 
 
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
 
 
 
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+          BASEURL: ${{ vars.BASEURL }}
 
 
 
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+
+
+
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+
+
+
+
+
+
+
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+
+
+
+
+
+
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+
+
+
+
 
 
 
@@ -1352,7 +2699,15 @@ jobs:
 
 
 
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+
+
+
+
+          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
+
+
+
+
 
 
 
@@ -1360,7 +2715,19 @@ jobs:
 
 
 
-          GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
+
+
+
+
+          GRANT_TYPE: ${{ vars.GRANT_TYPE }}
+
+
+
+
+
+
+
+
 
 
 
@@ -1372,7 +2739,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1380,11 +2755,27 @@ jobs:
 
 
 
+
+
+
+
           npm install -g allure-commandline
 
 
 
+
+
+
+
           allure generate allure-results --clean -o allure-report
+
+
+
+
+
+
+
+
 
 
 
@@ -1396,7 +2787,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1404,7 +2803,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1412,11 +2819,27 @@ jobs:
 
 
 
+
+
+
+
           path: reports/html-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1428,7 +2851,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1436,7 +2867,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1444,11 +2883,27 @@ jobs:
 
 
 
+
+
+
+
           path: allure-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1460,7 +2915,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1468,7 +2931,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1476,7 +2947,15 @@ jobs:
 
 
 
+
+
+
+
           path: reporting-labs/
+
+
+
+
 
 
 
@@ -1488,7 +2967,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -1496,7 +2987,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Runs when: Prod only
+
+
+
+
 
 
 
@@ -1504,7 +3003,15 @@ jobs:
 
 
 
+
+
+
+
   deploy-prod:
+
+
+
+
 
 
 
@@ -1512,7 +3019,15 @@ jobs:
 
 
 
+
+
+
+
     needs: sanity-staging
+
+
+
+
 
 
 
@@ -1520,7 +3035,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -1528,11 +3051,23 @@ jobs:
 
 
 
+
+
+
+
     steps:
 
 
 
+
+
+
+
       - name: Deploy to PROD
+
+
+
+
 
 
 
@@ -1544,7 +3079,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   smoke-prod:
+
+
+
+
 
 
 
@@ -1552,7 +3099,15 @@ jobs:
 
 
 
+
+
+
+
     needs: deploy-prod
+
+
+
+
 
 
 
@@ -1560,7 +3115,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -1568,7 +3131,15 @@ jobs:
 
 
 
+
+
+
+
     steps:
+
+
+
+
 
 
 
@@ -1576,11 +3147,23 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/checkout\@v4
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1592,7 +3175,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Setup Node.js
+
+
+
+
 
 
 
@@ -1600,11 +3195,23 @@ jobs:
 
 
 
+
+
+
+
         with:
 
 
 
+
+
+
+
           node-version: 24
+
+
+
+
 
 
 
@@ -1616,7 +3223,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Cache Playwright browsers
+
+
+
+
 
 
 
@@ -1624,7 +3243,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/cache\@v4
+
+
+
+
 
 
 
@@ -1632,7 +3259,15 @@ jobs:
 
 
 
-          path: \\~/.cache/ms-playwright
+
+
+
+
+          path: \\\\~/.cache/ms-playwright
+
+
+
+
 
 
 
@@ -1644,7 +3279,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install dependencies
+
+
+
+
 
 
 
@@ -1656,11 +3303,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright browsers
 
 
 
+
+
+
+
         if: steps.pw-cache-prod.outputs.cache-hit != 'true'
+
+
+
+
 
 
 
@@ -1672,11 +3335,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Install Playwright OS deps only
 
 
 
+
+
+
+
         if: steps.pw-cache-prod.outputs.cache-hit == 'true'
+
+
+
+
 
 
 
@@ -1688,7 +3367,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Restore reportingLabs history
+
+
+
+
 
 
 
@@ -1696,7 +3387,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1704,7 +3403,15 @@ jobs:
 
 
 
+
+
+
+
           key: reporting-labs-history-prod-${{ github.run_id }}
+
+
+
+
 
 
 
@@ -1716,7 +3423,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Run Smoke Tests on PROD
+
+
+
+
 
 
 
@@ -1724,7 +3443,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -1732,7 +3459,15 @@ jobs:
 
 
 
+
+
+
+
           echo "========================================="
+
+
+
+
 
 
 
@@ -1740,27 +3475,55 @@ jobs:
 
 
 
+
+
+
+
         env:
 
 
 
-          ENV: prod
 
 
 
-          BASE_URL: ${{ secrets.BASEURL }}
+
+          ENV: PROD
 
 
 
-          USERNAME: ${{ secrets.OPENCART_USERNAME }}
 
 
 
-          PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+          BASEURL: ${{ vars.BASEURL }}
 
 
 
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+
+
+
+          OPENCART_USERNAME: ${{ secrets.OPENCART_USERNAME }}
+
+
+
+
+
+
+
+          OPENCART_PASSWORD: ${{ secrets.OPENCART_PASSWORD }}
+
+
+
+
+
+
+
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+
+
+
+
 
 
 
@@ -1768,7 +3531,15 @@ jobs:
 
 
 
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+
+
+
+
+          OAUTH_CLIENT_ID: ${{ vars.OAUTH_CLIENT_ID }}
+
+
+
+
 
 
 
@@ -1776,7 +3547,19 @@ jobs:
 
 
 
-          GRANT_TYPE: ${{ secrets.GRANT_TYPE }}
+
+
+
+
+          GRANT_TYPE: ${{ vars.GRANT_TYPE }}
+
+
+
+
+
+
+
+
 
 
 
@@ -1788,7 +3571,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1796,7 +3587,15 @@ jobs:
 
 
 
+
+
+
+
           npm install -g allure-commandline
+
+
+
+
 
 
 
@@ -1808,7 +3607,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Upload PROD HTML Report
+
+
+
+
 
 
 
@@ -1816,7 +3627,15 @@ jobs:
 
 
 
+
+
+
+
         uses: actions/upload-artifact\@v4
+
+
+
+
 
 
 
@@ -1824,7 +3643,15 @@ jobs:
 
 
 
+
+
+
+
           name: prod-smoke-html-report
+
+
+
+
 
 
 
@@ -1832,7 +3659,19 @@ jobs:
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1844,7 +3683,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1852,7 +3699,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1860,11 +3715,27 @@ jobs:
 
 
 
+
+
+
+
           path: allure-report/
 
 
 
+
+
+
+
           retention-days: 30
+
+
+
+
+
+
+
+
 
 
 
@@ -1876,7 +3747,15 @@ jobs:
 
 
 
+
+
+
+
         if: always()
+
+
+
+
 
 
 
@@ -1884,7 +3763,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -1892,7 +3779,15 @@ jobs:
 
 
 
+
+
+
+
           path: reporting-labs/
+
+
+
+
 
 
 
@@ -1904,7 +3799,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
   # ═════════════════════════════════════════════════════
+
+
+
+
 
 
 
@@ -1912,7 +3819,15 @@ jobs:
 
 
 
+
+
+
+
   #   ➜ Always runs (handles skipped jobs gracefully)
+
+
+
+
 
 
 
@@ -1920,7 +3835,15 @@ jobs:
 
 
 
+
+
+
+
   notify:
+
+
+
+
 
 
 
@@ -1928,7 +3851,15 @@ jobs:
 
 
 
+
+
+
+
     needs: [build, sanity-dev, regression-qa, sanity-staging, smoke-prod]
+
+
+
+
 
 
 
@@ -1936,7 +3867,15 @@ jobs:
 
 
 
+
+
+
+
     runs-on: ubuntu-latest
+
+
+
+
 
 
 
@@ -1944,7 +3883,15 @@ jobs:
 
 
 
+
+
+
+
       pages: write
+
+
+
+
 
 
 
@@ -1952,7 +3899,15 @@ jobs:
 
 
 
+
+
+
+
       contents: write
+
+
+
+
 
 
 
@@ -1960,7 +3915,15 @@ jobs:
 
 
 
+
+
+
+
       - name: Set Status Emoji
+
+
+
+
 
 
 
@@ -1968,7 +3931,15 @@ jobs:
 
 
 
+
+
+
+
         run: |
+
+
+
+
 
 
 
@@ -1976,7 +3947,15 @@ jobs:
 
 
 
+
+
+
+
           DEV="${{ needs.sanity-dev.result }}"
+
+
+
+
 
 
 
@@ -1984,11 +3963,27 @@ jobs:
 
 
 
+
+
+
+
           STAGING="${{ needs.sanity-staging.result }}"
 
 
 
+
+
+
+
           PROD="${{ needs.smoke-prod.result }}"
+
+
+
+
+
+
+
+
 
 
 
@@ -2004,7 +3999,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           echo "build=$(get_emoji $BUILD)" >> $GITHUB_OUTPUT
+
+
+
+
 
 
 
@@ -2012,11 +4019,23 @@ jobs:
 
 
 
+
+
+
+
           echo "qa=$(get_emoji $QA)" >> $GITHUB_OUTPUT
 
 
 
+
+
+
+
           echo "staging=$(get_emoji $STAGING)" >> $GITHUB_OUTPUT
+
+
+
+
 
 
 
@@ -2028,7 +4047,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           # Check only the stages that actually ran (not skipped)
+
+
+
+
 
 
 
@@ -2036,7 +4067,15 @@ jobs:
 
 
 
+
+
+
+
           for result in "$BUILD" "$DEV" "$QA" "$STAGING" "$PROD"; do
+
+
+
+
 
 
 
@@ -2044,11 +4083,23 @@ jobs:
 
 
 
+
+
+
+
               FAILED=true
 
 
 
+
+
+
+
             fi
+
+
+
+
 
 
 
@@ -2060,7 +4111,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           if [ "$FAILED" = "true" ]; then
+
+
+
+
 
 
 
@@ -2068,11 +4131,23 @@ jobs:
 
 
 
+
+
+
+
           else
 
 
 
+
+
+
+
             echo "overall=✅ ALL PASSED" >> $GITHUB_OUTPUT
+
+
+
+
 
 
 
@@ -2084,7 +4159,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           REPORT_BASE="https://ankur2sky.github.io/Playwright-Web-API-AutomationFramework/runs/${{ github.run_id }}"
+
+
+
+
 
 
 
@@ -2096,7 +4183,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Download All Reports
+
+
+
+
 
 
 
@@ -2104,7 +4203,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -2116,11 +4223,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Organize Reports for GitHub Pages
 
 
 
+
+
+
+
         run: |
+
+
+
+
 
 
 
@@ -2132,7 +4255,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           # Create index page for this run
+
+
+
+
 
 
 
@@ -2140,23 +4275,47 @@ jobs:
 
 
 
-          <!DOCTYPE html>
 
 
 
-          <html>
+
+          \<!DOCTYPE html>
 
 
 
-          <head>
 
 
 
-            <title>Pipeline Reports — Run RUN_ID</title>
+
+          \<html>
 
 
 
-            <style>
+
+
+
+
+          \<head>
+
+
+
+
+
+
+
+            \<title>Pipeline Reports — Run RUN_ID\</title>
+
+
+
+
+
+
+
+            \<style>
+
+
+
+
 
 
 
@@ -2164,7 +4323,15 @@ jobs:
 
 
 
+
+
+
+
               .container { max-width: 800px; margin: 0 auto; }
+
+
+
+
 
 
 
@@ -2172,7 +4339,15 @@ jobs:
 
 
 
+
+
+
+
               .env-tag { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; color: white; margin-left: 8px; }
+
+
+
+
 
 
 
@@ -2180,7 +4355,15 @@ jobs:
 
 
 
+
+
+
+
               .card { background: white; border-radius: 12px; padding: 24px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+
+
+
 
 
 
@@ -2188,7 +4371,15 @@ jobs:
 
 
 
+
+
+
+
               .card.skipped { opacity: 0.5; }
+
+
+
+
 
 
 
@@ -2196,7 +4387,15 @@ jobs:
 
 
 
+
+
+
+
               .links { display: flex; gap: 12px; flex-wrap: wrap; }
+
+
+
+
 
 
 
@@ -2204,7 +4403,15 @@ jobs:
 
 
 
+
+
+
+
               .html-btn { background: #1a1a2e; }
+
+
+
+
 
 
 
@@ -2212,7 +4419,15 @@ jobs:
 
 
 
+
+
+
+
               .rlabs-btn { background: #6f42c1; }
+
+
+
+
 
 
 
@@ -2220,63 +4435,55 @@ jobs:
 
 
 
-            </style>
 
 
 
-          </head>
 
+            \</style>
 
 
-          <body>
 
 
 
-            <div class="container">
 
 
+          \</head>
 
-              <h1>🎭 Pipeline Reports <span class="env-tag tag-selected">ENV_SELECTED</span></h1>
 
 
 
-              <p class="meta">Run ID: RUN_ID | Branch: BRANCH | Date: RUN_DATE</p>
 
 
 
+          \<body>
 
 
 
 
-              <div class="card">
 
 
 
-                <h2>🟢 DEV — Sanity</h2>
+            \<div class="container">
 
 
 
-                <div class="links">
 
 
 
-                  <a class="btn html-btn" href="dev-html/index.html">📊 HTML Report</a>
 
+              \<h1>🎭 Pipeline Reports \<span class="env-tag tag-selected">ENV_SELECTED\</span>\</h1>
 
 
-                  <a class="btn allure-btn" href="dev-allure/index.html">📈 Allure Report</a>
 
 
 
-                  <a class="btn rlabs-btn" href="dev-rlabs/index.html">🧪 ReportingLabs</a>
 
 
+              \<p class="meta">Run ID: RUN_ID | Branch: BRANCH | Date: RUN_DATE\</p>
 
-                </div>
 
 
 
-              </div>
 
 
 
@@ -2284,119 +4491,311 @@ jobs:
 
 
 
-              <div class="card" id="qa-card">
 
 
 
-                <h2>🔵 QA — Regression</h2>
 
+              \<div class="card">
 
 
-                <div class="links">
 
 
 
-                  <a class="btn html-btn" href="qa-html/index.html">📊 HTML Report</a>
 
 
+                \<h2>🟢 DEV — Sanity\</h2>
 
-                  <a class="btn allure-btn" href="qa-allure/index.html">📈 Allure Report</a>
 
 
 
-                  <a class="btn rlabs-btn" href="qa-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
-                </div>
+                \<div class="links">
 
 
 
-              </div>
 
 
 
 
+                  \<a class="btn html-btn" href="dev-html/index.html">📊 HTML Report\</a>
 
 
 
-              <div class="card" id="Staging-card">
 
 
 
-                <h2>🟡 Staging — Sanity</h2>
 
+                  \<a class="btn allure-btn" href="dev-allure/index.html">📈 Allure Report\</a>
 
 
-                <div class="links">
 
 
 
-                  <a class="btn html-btn" href="Staging-html/index.html">📊 HTML Report</a>
 
 
+                  \<a class="btn rlabs-btn" href="dev-rlabs/index.html">🧪 ReportingLabs\</a>
 
-                  <a class="btn allure-btn" href="Staging-allure/index.html">📈 Allure Report</a>
 
 
 
-                  <a class="btn rlabs-btn" href="Staging-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
-                </div>
+                \</div>
 
 
 
-              </div>
 
 
 
 
+              \</div>
 
 
 
-              <div class="card" id="prod-card">
 
 
 
-                <h2>🔴 PROD — Smoke</h2>
 
 
 
-                <div class="links">
 
 
 
-                  <a class="btn html-btn" href="prod-html/index.html">📊 HTML Report</a>
 
 
 
-                  <a class="btn allure-btn" href="prod-allure/index.html">📈 Allure Report</a>
+              \<div class="card" id="qa-card">
 
 
 
-                  <a class="btn rlabs-btn" href="prod-rlabs/index.html">🧪 ReportingLabs</a>
 
 
 
-                </div>
 
+                \<h2>🔵 QA — Regression\</h2>
 
 
-              </div>
 
 
 
-            </div>
 
 
+                \<div class="links">
 
-          </body>
 
 
 
-          </html>
+
+
+
+                  \<a class="btn html-btn" href="qa-html/index.html">📊 HTML Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn allure-btn" href="qa-allure/index.html">📈 Allure Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn rlabs-btn" href="qa-rlabs/index.html">🧪 ReportingLabs\</a>
+
+
+
+
+
+
+
+                \</div>
+
+
+
+
+
+
+
+              \</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              \<div class="card" id="Staging-card">
+
+
+
+
+
+
+
+                \<h2>🟡 Staging — Sanity\</h2>
+
+
+
+
+
+
+
+                \<div class="links">
+
+
+
+
+
+
+
+                  \<a class="btn html-btn" href="Staging-html/index.html">📊 HTML Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn allure-btn" href="Staging-allure/index.html">📈 Allure Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn rlabs-btn" href="Staging-rlabs/index.html">🧪 ReportingLabs\</a>
+
+
+
+
+
+
+
+                \</div>
+
+
+
+
+
+
+
+              \</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              \<div class="card" id="prod-card">
+
+
+
+
+
+
+
+                \<h2>🔴 PROD — Smoke\</h2>
+
+
+
+
+
+
+
+                \<div class="links">
+
+
+
+
+
+
+
+                  \<a class="btn html-btn" href="prod-html/index.html">📊 HTML Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn allure-btn" href="prod-allure/index.html">📈 Allure Report\</a>
+
+
+
+
+
+
+
+                  \<a class="btn rlabs-btn" href="prod-rlabs/index.html">🧪 ReportingLabs\</a>
+
+
+
+
+
+
+
+                \</div>
+
+
+
+
+
+
+
+              \</div>
+
+
+
+
+
+
+
+            \</div>
+
+
+
+
+
+
+
+          \</body>
+
+
+
+
+
+
+
+          \</html>
+
+
+
+
 
 
 
@@ -2408,7 +4807,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           sed -i "s|RUN_ID|${{ github.run_id }}|g" pages-deploy/runs/${{ github.run_id }}/index.html
+
+
+
+
 
 
 
@@ -2416,7 +4827,15 @@ jobs:
 
 
 
+
+
+
+
           sed -i "s|RUN_DATE|$(date +'%d %b %Y, %I:%M %p UTC')|g" pages-deploy/runs/${{ github.run_id }}/index.html
+
+
+
+
 
 
 
@@ -2428,7 +4847,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           # Copy reports into organized folders (|| true handles skipped stages)
+
+
+
+
 
 
 
@@ -2436,7 +4867,15 @@ jobs:
 
 
 
+
+
+
+
           cp -r all-reports/dev-sanity-allure-report/ pages-deploy/runs/${{ github.run_id }}/dev-allure/ 2>/dev/null || true
+
+
+
+
 
 
 
@@ -2444,7 +4883,15 @@ jobs:
 
 
 
+
+
+
+
           cp -r all-reports/qa-regression-html-report/ pages-deploy/runs/${{ github.run_id }}/qa-html/ 2>/dev/null || true
+
+
+
+
 
 
 
@@ -2452,7 +4899,15 @@ jobs:
 
 
 
+
+
+
+
           cp -r all-reports/qa-regression-reportinglabs-report/ pages-deploy/runs/${{ github.run_id }}/qa-rlabs/ 2>/dev/null || true
+
+
+
+
 
 
 
@@ -2460,7 +4915,15 @@ jobs:
 
 
 
+
+
+
+
           cp -r all-reports/Staging-sanity-allure-report/ pages-deploy/runs/${{ github.run_id }}/Staging-allure/ 2>/dev/null || true
+
+
+
+
 
 
 
@@ -2468,11 +4931,23 @@ jobs:
 
 
 
+
+
+
+
           cp -r all-reports/prod-smoke-html-report/ pages-deploy/runs/${{ github.run_id }}/prod-html/ 2>/dev/null || true
 
 
 
+
+
+
+
           cp -r all-reports/prod-smoke-allure-report/ pages-deploy/runs/${{ github.run_id }}/prod-allure/ 2>/dev/null || true
+
+
+
+
 
 
 
@@ -2484,7 +4959,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           echo "Reports organized ✅"
+
+
+
+
 
 
 
@@ -2496,7 +4983,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Deploy to GitHub Pages
+
+
+
+
 
 
 
@@ -2504,7 +5003,15 @@ jobs:
 
 
 
+
+
+
+
         with:
+
+
+
+
 
 
 
@@ -2512,7 +5019,15 @@ jobs:
 
 
 
+
+
+
+
           publish_dir: pages-deploy
+
+
+
+
 
 
 
@@ -2524,11 +5039,27 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Create HTML Dashboard for Email
 
 
 
+
+
+
+
         run: |
+
+
+
+
 
 
 
@@ -2540,23 +5071,51 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
           cat > dashboard.html << DASHBOARD
 
 
 
-          <!DOCTYPE html>
 
 
 
-          <html>
+
+          \<!DOCTYPE html>
 
 
 
-          <head>
 
 
 
-            <style>
+
+          \<html>
+
+
+
+
+
+
+
+          \<head>
+
+
+
+
+
+
+
+            \<style>
+
+
+
+
 
 
 
@@ -2564,7 +5123,15 @@ jobs:
 
 
 
+
+
+
+
               .container { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+
+
+
+
 
 
 
@@ -2572,7 +5139,15 @@ jobs:
 
 
 
+
+
+
+
               .header h1 { margin: 0; font-size: 24px; }
+
+
+
+
 
 
 
@@ -2580,7 +5155,15 @@ jobs:
 
 
 
+
+
+
+
               .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; margin-top: 12px; }
+
+
+
+
 
 
 
@@ -2588,7 +5171,15 @@ jobs:
 
 
 
+
+
+
+
               .fail { background: #dc3545; color: white; }
+
+
+
+
 
 
 
@@ -2596,7 +5187,15 @@ jobs:
 
 
 
+
+
+
+
               table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+
+
+
+
 
 
 
@@ -2604,7 +5203,15 @@ jobs:
 
 
 
+
+
+
+
               td { padding: 14px 16px; border-bottom: 1px solid #eee; font-size: 14px; }
+
+
+
+
 
 
 
@@ -2612,7 +5219,15 @@ jobs:
 
 
 
+
+
+
+
               .test-type { color: #666; font-size: 13px; }
+
+
+
+
 
 
 
@@ -2620,7 +5235,15 @@ jobs:
 
 
 
+
+
+
+
               .reports { background: #f8f9fa; padding: 20px 24px; border-top: 1px solid #eee; }
+
+
+
+
 
 
 
@@ -2628,7 +5251,15 @@ jobs:
 
 
 
+
+
+
+
               .report-link { display: inline-block; padding: 10px 20px; background: #1a1a2e; color: white; text-decoration: none; border-radius: 6px; margin: 4px; font-size: 13px; }
+
+
+
+
 
 
 
@@ -2636,7 +5267,15 @@ jobs:
 
 
 
+
+
+
+
               .footer { text-align: center; padding: 16px; color: #999; font-size: 12px; border-top: 1px solid #eee; }
+
+
+
+
 
 
 
@@ -2644,123 +5283,247 @@ jobs:
 
 
 
+
+
+
+
               .env-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; color: white; background: #007bff; }
 
 
 
-            </style>
 
 
 
-          </head>
 
+            \</style>
 
 
-          <body>
 
 
 
-            <div class="container">
 
 
+          \</head>
 
-              <div class="header">
 
 
 
-                <h1>🎭 Playwright CI/CD Dashboard</h1>
 
 
 
-                <p>Master Pipeline Report — Run up to: <span class="env-badge">${{ github.event.inputs.environment }}</span></p>
+          \<body>
 
 
 
-              </div>
 
 
 
-              <div class="body">
 
+            \<div class="container">
 
 
-                <div class="meta">
 
 
 
-                  <span>🔀 Branch: <strong>${{ github.ref_name }}</strong></span>
 
 
+              \<div class="header">
 
-                  <span>👤 ${{ github.actor }}</span>
 
 
 
-                </div>
 
 
 
-                <table>
+                \<h1>🎭 Playwright CI/CD Dashboard\</h1>
 
 
 
-                  <tr><th>Environment</th><th>Test Suite</th><th>Status</th></tr>
 
 
 
-                  <tr><td class="env-name">🔨 Build</td><td class="test-type">Maven Unit Tests</td><td class="status">${{ steps.status.outputs.build }}</td></tr>
 
+                \<p>Master Pipeline Report — Run up to: \<span class="env-badge">${{ github.event.inputs.environment }}\</span>\</p>
 
 
-                  <tr><td class="env-name">🟢 DEV</td><td class="test-type">Sanity (@smoke)</td><td class="status">${{ steps.status.outputs.dev }}</td></tr>
 
 
 
-                  <tr><td class="env-name">🔵 QA</td><td class="test-type">Regression (All Tests)</td><td class="status">${{ steps.status.outputs.qa }}</td></tr>
 
 
+              \</div>
 
-                  <tr><td class="env-name">🟡 Staging</td><td class="test-type">Sanity (@smoke)</td><td class="status">${{ steps.status.outputs.staging }}</td></tr>
 
 
 
-                  <tr><td class="env-name">🔴 PROD</td><td class="test-type">Smoke (@smoke)</td><td class="status">${{ steps.status.outputs.prod }}</td></tr>
 
 
 
-                </table>
+              \<div class="body">
 
 
 
-              </div>
 
 
 
-              <div class="reports">
 
+                \<div class="meta">
 
 
-                <h3>📊 View Reports (Click to Open)</h3>
 
 
 
-                <a class="report-link" href="${REPORT_URL}/index.html">📁 All Reports Dashboard</a>
 
 
+                  \<span>🔀 Branch: \<strong>${{ github.ref_name }}\</strong>\</span>
 
-                <a class="report-link green" href="${REPORT_URL}/qa-html/index.html">📊 QA HTML Report</a>
 
 
 
-                <a class="report-link green" href="${REPORT_URL}/qa-allure/index.html">📈 QA Allure Report</a>
 
 
 
-              </div>
+                  \<span>👤 ${{ github.actor }}\</span>
 
 
 
-              <div class="footer">
+
+
+
+
+                \</div>
+
+
+
+
+
+
+
+                \<table>
+
+
+
+
+
+
+
+                  \<tr>\<th>Environment\</th>\<th>Test Suite\</th>\<th>Status\</th>\</tr>
+
+
+
+
+
+
+
+                  \<tr>\<td class="env-name">🔨 Build\</td>\<td class="test-type">Maven Unit Tests\</td>\<td class="status">${{ steps.status.outputs.build }}\</td>\</tr>
+
+
+
+
+
+
+
+                  \<tr>\<td class="env-name">🟢 DEV\</td>\<td class="test-type">Sanity (@smoke)\</td>\<td class="status">${{ steps.status.outputs.dev }}\</td>\</tr>
+
+
+
+
+
+
+
+                  \<tr>\<td class="env-name">🔵 QA\</td>\<td class="test-type">Regression (All Tests)\</td>\<td class="status">${{ steps.status.outputs.qa }}\</td>\</tr>
+
+
+
+
+
+
+
+                  \<tr>\<td class="env-name">🟡 Staging\</td>\<td class="test-type">Sanity (@smoke)\</td>\<td class="status">${{ steps.status.outputs.staging }}\</td>\</tr>
+
+
+
+
+
+
+
+                  \<tr>\<td class="env-name">🔴 PROD\</td>\<td class="test-type">Smoke (@smoke)\</td>\<td class="status">${{ steps.status.outputs.prod }}\</td>\</tr>
+
+
+
+
+
+
+
+                \</table>
+
+
+
+
+
+
+
+              \</div>
+
+
+
+
+
+
+
+              \<div class="reports">
+
+
+
+
+
+
+
+                \<h3>📊 View Reports (Click to Open)\</h3>
+
+
+
+
+
+
+
+                \<a class="report-link" href="${REPORT_URL}/index.html">📁 All Reports Dashboard\</a>
+
+
+
+
+
+
+
+                \<a class="report-link green" href="${REPORT_URL}/qa-html/index.html">📊 QA HTML Report\</a>
+
+
+
+
+
+
+
+                \<a class="report-link green" href="${REPORT_URL}/qa-allure/index.html">📈 QA Allure Report\</a>
+
+
+
+
+
+
+
+              \</div>
+
+
+
+
+
+
+
+              \<div class="footer">
+
+
+
+
 
 
 
@@ -2768,19 +5531,39 @@ jobs:
 
 
 
-              </div>
 
 
 
-            </div>
+
+              \</div>
 
 
 
-          </body>
 
 
 
-          </html>
+
+            \</div>
+
+
+
+
+
+
+
+          \</body>
+
+
+
+
+
+
+
+          \</html>
+
+
+
+
 
 
 
@@ -2794,7 +5577,21 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
+
+
       - name: Send Slack Notification
+
+
+
+
 
 
 
@@ -2802,7 +5599,15 @@ jobs:
 
 
 
+
+
+
+
         uses: 8398a7/action-slack\@v3
+
+
+
+
 
 
 
@@ -2810,7 +5615,15 @@ jobs:
 
 
 
+
+
+
+
           status: custom
+
+
+
+
 
 
 
@@ -2818,7 +5631,15 @@ jobs:
 
 
 
+
+
+
+
             {
+
+
+
+
 
 
 
@@ -2826,7 +5647,15 @@ jobs:
 
 
 
+
+
+
+
                 {
+
+
+
+
 
 
 
@@ -2834,15 +5663,31 @@ jobs:
 
 
 
+
+
+
+
                   "text": { "type": "plain_text", "text": "🎭 Playwright CI/CD Pipeline Report" }
 
 
 
+
+
+
+
                 },
 
 
 
+
+
+
+
                 {
+
+
+
+
 
 
 
@@ -2850,7 +5695,15 @@ jobs:
 
 
 
-                  "text": { "type": "mrkdwn", "text": "\\\*Overall: ${{ steps.status.outputs.overall }}\\\\n*\\\*Run up to:\\\* \\\`${{ github.event.inputs.environment }}\\\`*\n\n*\\\*Branch:\\\* \\\`${{ github.ref_name }}\\\`  |  \\\*Triggered by:\\\* \\\`${{ github.actor }}\\\`" }
+
+
+
+
+                  "text": { "type": "mrkdwn", "text": "*\\\\*\\\*Overall: ${{ steps.status.outputs.overall }}*\\\\\\\\*&#x6E;\\\\\*\\\*Run up to:*\\\\*\\\* *\\\\*\\\`${{ github.event.inputs.environment }}*\\\\*\\\`\\n\n*\\\\\*\\\*Branch:*\\\\*\\\* *\\\\*\\\`${{ github.ref_name }}*\\\\*\\\`  |  *\\\\*\\\*Triggered by:*\\\\*\\\* *\\\\*\\\`${{ github.actor }}*\\\\***\\\`" }
+
+
+
+
 
 
 
@@ -2858,11 +5711,23 @@ jobs:
 
 
 
+
+
+
+
                 { "type": "divider" },
 
 
 
+
+
+
+
                 {
+
+
+
+
 
 
 
@@ -2870,7 +5735,15 @@ jobs:
 
 
 
-                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  \\\*Build\\\* — Maven Unit Test&#x73;*\n*${{ steps.status.outputs.dev }}  \\\*DEV\\\* — Sanity (@smoke)*\n*${{ steps.status.outputs.qa }}  \\\*QA\\\* — Regression (All Tests)*\n*${{ steps.status.outputs.staging }}  \\\*Staging\\\* — Sanity (@smoke)*\n*${{ steps.status.outputs.prod }}  \\\*PROD\\\* — Smoke (@smoke)" }
+
+
+
+
+                  "text": { "type": "mrkdwn", "text": "${{ steps.status.outputs.build }}  *\\\\*\\\*Buil&#x64;*\\\\*\\\* — Maven Unit Test&#x73;\\n*\*${{ steps.status.outputs.dev }}  *\\\\*\\\*DE&#x56;*\\\\*\\\* — Sanity (@smoke)\\n*\*${{ steps.status.outputs.qa }}  *\\\\*\\\*Q&#x41;*\\\\*\\\* — Regression (All Tests)\\n*\*${{ steps.status.outputs.staging }}  *\\\\*\\\*Stagin&#x67;*\\\\*\\\* — Sanity (@smoke)\\n*\*${{ steps.status.outputs.prod }}  *\\\\*\\\*PRO&#x44;*\\\\*\\\* — Smoke (@smoke)" }
+
+
+
+
 
 
 
@@ -2878,11 +5751,23 @@ jobs:
 
 
 
+
+
+
+
                 { "type": "divider" },
 
 
 
+
+
+
+
                 {
+
+
+
+
 
 
 
@@ -2890,7 +5775,15 @@ jobs:
 
 
 
+
+
+
+
                   "elements": [
+
+
+
+
 
 
 
@@ -2898,7 +5791,15 @@ jobs:
 
 
 
+
+
+
+
                       "type": "button",
+
+
+
+
 
 
 
@@ -2906,7 +5807,15 @@ jobs:
 
 
 
+
+
+
+
                       "url": "${{ steps.status.outputs.report_url }}/index.html",
+
+
+
+
 
 
 
@@ -2914,7 +5823,15 @@ jobs:
 
 
 
+
+
+
+
                     },
+
+
+
+
 
 
 
@@ -2922,7 +5839,15 @@ jobs:
 
 
 
+
+
+
+
                       "type": "button",
+
+
+
+
 
 
 
@@ -2930,7 +5855,15 @@ jobs:
 
 
 
+
+
+
+
                       "url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+
+
+
 
 
 
@@ -2938,7 +5871,15 @@ jobs:
 
 
 
+
+
+
+
                   ]
+
+
+
+
 
 
 
@@ -2946,7 +5887,15 @@ jobs:
 
 
 
+
+
+
+
               ]
+
+
+
+
 
 
 
@@ -2954,7 +5903,15 @@ jobs:
 
 
 
+
+
+
+
         env:
+
+
+
+
 
 
 
@@ -2966,7 +5923,19 @@ jobs:
 
 
 
+
+
+
+
+
+
+
+
       - name: Pipeline Summary
+
+
+
+
 
 
 
@@ -2974,7 +5943,15 @@ jobs:
 
 
 
+
+
+
+
           echo "═══════════════════════════════════════════"
+
+
+
+
 
 
 
@@ -2982,7 +5959,15 @@ jobs:
 
 
 
+
+
+
+
           echo "═══════════════════════════════════════════"
+
+
+
+
 
 
 
@@ -2990,7 +5975,15 @@ jobs:
 
 
 
+
+
+
+
           echo "─────────────────────────────────────────"
+
+
+
+
 
 
 
@@ -2998,7 +5991,15 @@ jobs:
 
 
 
+
+
+
+
           echo "  DEV Sanity:      ${{ needs.sanity-dev.result }}"
+
+
+
+
 
 
 
@@ -3006,7 +6007,15 @@ jobs:
 
 
 
+
+
+
+
           echo "  Staging Sanity:    ${{ needs.sanity-staging.result }}"
+
+
+
+
 
 
 
@@ -3014,7 +6023,15 @@ jobs:
 
 
 
+
+
+
+
           echo "  Reports:         ${{ steps.status.outputs.report_url }}/index.html"
+
+
+
+
 
 
 
@@ -3022,11 +6039,23 @@ jobs:
 
 
 
+
+
+
+
           echo ""
 
 
 
+
+
+
+
           echo "  ℹ️  '⏭️ skipped' = not included in this run"
+
+
+
+
 
 
 
