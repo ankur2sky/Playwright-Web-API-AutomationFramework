@@ -1,0 +1,14 @@
+{
+  id: 8649731,
+  name: 'api tester',
+  email: 'api_automation_1791180165067@open.com',
+  gender: 'male',
+  status: 'active'
+} 200
+{
+  id: 8649731,
+  name: 'apiautomation-updated',
+  email: 'api_automation_1791180165067@open.com',
+  gender: 'male',
+  status: 'inactive'
+} 200
