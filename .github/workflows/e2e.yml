@@ -1203,6 +1203,20 @@ jobs:
 
           DASHBOARD
 
+      - name: Send Email with Dashboard
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Playwright CI/CD Pipeline - ${{ steps.status.outputs.overall }}"
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: "Playwright CI Bot <${{ secrets.EMAIL_USERNAME }}>"
+          html_body: file://dashboard.html
+
       - name: Send Slack Notification
 
         if: always()
