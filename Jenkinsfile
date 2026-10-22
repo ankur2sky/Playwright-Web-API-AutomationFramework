@@ -36,6 +36,10 @@ pipeline {
     environment {
         SLACK_CHANNEL = '#all-playwrighttesting'
     }
+    triggers {
+        // Local Jenkins can't receive GitHub webhooks, so check GitHub every 5 minutes
+        pollSCM('H/5 * * * *')
+    }
     options {
         timeout(time: 30, unit: 'MINUTES')
         timestamps()
@@ -139,10 +143,25 @@ pipeline {
                         alwaysLinkToLastBuild: true
                     ])
                     script {
+                        // Latest-run Allure report in the build sidebar (plugin keeps only one per build)
                         try {
                             allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
                         } catch (err) {
-                            echo "Allure report skipped: ${err.message}"
+                            echo "Allure plugin report skipped: ${err.message}"
+                        }
+                        // Separate Allure report for THIS stage (single HTML file, so it opens inside Jenkins)
+                        try {
+                            def allureHome = tool name: 'Allure', type: 'org.allurereport.jenkins.tools.AllureCommandlineInstallation'
+                            bat "\"${allureHome}\\bin\\allure.bat\" generate qa-tests\\allure-results --single-file --clean -o reports-qa\\allure"
+                            publishHTML(target: [
+                                reportName: 'QA Regression - Allure Report',
+                                reportDir: 'reports-qa/allure',
+                                reportFiles: 'index.html',
+                                keepAll: true,
+                                alwaysLinkToLastBuild: true
+                            ])
+                        } catch (err) {
+                            echo "Per-stage Allure report skipped: ${err.message}"
                         }
                     }
                     publishHTML(target: [
@@ -215,10 +234,25 @@ pipeline {
                         alwaysLinkToLastBuild: true
                     ])
                     script {
+                        // Latest-run Allure report in the build sidebar (plugin keeps only one per build)
                         try {
                             allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
                         } catch (err) {
-                            echo "Allure report skipped: ${err.message}"
+                            echo "Allure plugin report skipped: ${err.message}"
+                        }
+                        // Separate Allure report for THIS stage (single HTML file, so it opens inside Jenkins)
+                        try {
+                            def allureHome = tool name: 'Allure', type: 'org.allurereport.jenkins.tools.AllureCommandlineInstallation'
+                            bat "\"${allureHome}\\bin\\allure.bat\" generate qa-tests\\allure-results --single-file --clean -o reports-stage\\allure"
+                            publishHTML(target: [
+                                reportName: 'STAGE Sanity - Allure Report',
+                                reportDir: 'reports-stage/allure',
+                                reportFiles: 'index.html',
+                                keepAll: true,
+                                alwaysLinkToLastBuild: true
+                            ])
+                        } catch (err) {
+                            echo "Per-stage Allure report skipped: ${err.message}"
                         }
                     }
                     publishHTML(target: [
@@ -235,6 +269,7 @@ pipeline {
         // STAGE 6: DEPLOY PROD + SMOKE (with approval)
         // ═════════════════════════════════════════════════
         stage('Approval for PROD') {
+            when { not { triggeredBy 'SCMTrigger' } }
             steps {
                 input message: 'Deploy to PROD?',
                     ok: 'Yes, Deploy!',
@@ -242,6 +277,7 @@ pipeline {
             }
         }
         stage('Deploy to PROD') {
+            when { not { triggeredBy 'SCMTrigger' } }
             steps {
                 echo "========================================="
                 echo "  Deploying to PROD..."
@@ -250,6 +286,7 @@ pipeline {
             }
         }
         stage('PROD - Smoke Tests') {
+            when { not { triggeredBy 'SCMTrigger' } }
             steps {
                 echo "========================================="
                 echo "  Running SMOKE @smoke on PROD"
@@ -298,10 +335,25 @@ pipeline {
                         alwaysLinkToLastBuild: true
                     ])
                     script {
+                        // Latest-run Allure report in the build sidebar (plugin keeps only one per build)
                         try {
                             allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
                         } catch (err) {
-                            echo "Allure report skipped: ${err.message}"
+                            echo "Allure plugin report skipped: ${err.message}"
+                        }
+                        // Separate Allure report for THIS stage (single HTML file, so it opens inside Jenkins)
+                        try {
+                            def allureHome = tool name: 'Allure', type: 'org.allurereport.jenkins.tools.AllureCommandlineInstallation'
+                            bat "\"${allureHome}\\bin\\allure.bat\" generate qa-tests\\allure-results --single-file --clean -o reports-prod\\allure"
+                            publishHTML(target: [
+                                reportName: 'PROD Smoke - Allure Report',
+                                reportDir: 'reports-prod/allure',
+                                reportFiles: 'index.html',
+                                keepAll: true,
+                                alwaysLinkToLastBuild: true
+                            ])
+                        } catch (err) {
+                            echo "Per-stage Allure report skipped: ${err.message}"
                         }
                     }
                     publishHTML(target: [
@@ -322,8 +374,8 @@ pipeline {
         always {
             script {
                 def buildStatus = currentBuild.currentResult
-                def statusEmoji = buildStatus == 'SUCCESS' ? '✅' : '❌'
-                def statusColor = buildStatus == 'SUCCESS' ? 'good' : 'danger'
+                def statusEmoji = buildStatus == 'SUCCESS' ? '✅' : (buildStatus == 'UNSTABLE' ? '⚠️' : '❌')
+                def statusColor = buildStatus == 'SUCCESS' ? 'good' : (buildStatus == 'UNSTABLE' ? 'warning' : 'danger')
                 // Slack Notification
                 slackSend(
                     channel: env.SLACK_CHANNEL,
@@ -351,7 +403,7 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
                                 <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 30px; text-align: center;">
                                     <h1 style="margin: 0; font-size: 24px;">🎭 Playwright CI/CD Dashboard</h1>
                                     <p style="margin: 8px 0 0; opacity: 0.8;">Master Pipeline Report</p>
-                                    <span style="display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; margin-top: 12px; background: ${buildStatus == 'SUCCESS' ? '#28a745' : '#dc3545'}; color: white;">
+                                    <span style="display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 14px; margin-top: 12px; background: ${buildStatus == 'SUCCESS' ? '#28a745' : (buildStatus == 'UNSTABLE' ? '#e0a800' : '#dc3545')}; color: white;">
                                         ${statusEmoji} ${buildStatus}
                                     </span>
                                 </div>
@@ -383,6 +435,11 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
         success {
             echo '═══════════════════════════════════════════'
             echo '  PIPELINE: ✅ SUCCESS'
+            echo '═══════════════════════════════════════════'
+        }
+        unstable {
+            echo '═══════════════════════════════════════════'
+            echo '  PIPELINE: ⚠️ UNSTABLE'
             echo '═══════════════════════════════════════════'
         }
         failure {
