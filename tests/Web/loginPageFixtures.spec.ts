@@ -41,7 +41,7 @@ expect(await loginPage.isinValiderrorDisplayed()).toBeTruthy();
 // Read the excel data directly from XLSX file and loop the test data row wise
 let exceltestData = ExcelHelper.readExcel('testdata/opencartdata.xlsx','data')
 for (let row of exceltestData){
-test(`@ regression Login to app with invalid credential with excel data- ${row.username} - ${row.password}`
+test(`@regression Login to app with invalid credential with excel data- ${row.username} - ${row.password}`
     ,async({loginPage,homePage}) =>{
 
 await loginPage.doLogin(row.username,row.password);
