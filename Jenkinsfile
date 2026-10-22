@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 // Jenkinsfile — Master CI/CD Pipeline (WINDOWS VERSION)
 // Playwright TypeScript Framework
-//  Automation
+// Naveen Automation Labs
 // ═══════════════════════════════════════════════════════════════
 // Reports per stage (3 reports × 4 envs = 12 total):
 //   1. PW HTML Report    → reports-{env}/html/
@@ -80,84 +80,6 @@ pipeline {
             }
         }
         // ═════════════════════════════════════════════════
-        // STAGE 3: DEPLOY DEV + SANITY
-        // ═════════════════════════════════════════════════
-        stage('Deploy to DEV') {
-            steps {
-                echo "========================================="
-                echo "  Deploying to DEV..."
-                echo "========================================="
-                echo "DEV deployment complete ✅"
-            }
-        }
-        stage('DEV - Sanity Tests') {
-            steps {
-                echo "========================================="
-                echo "  Running SANITY @smoke on DEV"
-                echo "========================================="
-                dir('qa-tests') {
-                    bat '''
-                        if exist allure-results rmdir /s /q allure-results
-                        if exist reports rmdir /s /q reports
-                        if exist reporting-labs rmdir /s /q reporting-labs
-                    '''
-                    withCredentials([
-                        usernamePassword(credentialsId: 'dev-credentials',
-                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
-                        string(credentialsId: 'api-token', variable: 'API_TOKEN'),
-                        string(credentialsId: 'oauth-client-id', variable: 'OAUTH_CLIENT_ID'),
-                        string(credentialsId: 'oauth-client-secret', variable: 'OAUTH_CLIENT_SECRET'),
-                        string(credentialsId: 'dev-base-url', variable: 'BASE_URL'),
-                        string(credentialsId: 'api-base-url', variable: 'API_BASE_URL')
-                    ]) {
-                        bat '''
-                            set "ENV=dev"
-                            set "GRANT_TYPE=client_credentials"
-                            set "BASEURL=%BASE_URL%"
-                            if "%BASEURL%"=="" (
-                                echo ERROR: BASEURL is empty. Check Jenkins credential dev-base-url.
-                                exit /b 1
-                            )
-                            npx playwright test --project=chromium --grep @smoke
-                        '''
-                    }
-                }
-            }
-            post {
-                always {
-                    bat '''
-                        if not exist reports-dev\\html mkdir reports-dev\\html
-                        if not exist reports-dev\\allure mkdir reports-dev\\allure
-                        if not exist reports-dev\\reportinglabs mkdir reports-dev\\reportinglabs
-                    '''
-                    bat 'xcopy qa-tests\\reports\\html-report reports-dev\\html /E /I /Y /Q || exit /b 0'
-                    bat 'call allure generate qa-tests\\allure-results --clean -o reports-dev\\allure || exit /b 0'
-                    bat 'xcopy qa-tests\\reporting-labs reports-dev\\reportinglabs /E /I /Y /Q || exit /b 0'
-                    publishHTML(target: [
-                        reportName: 'DEV Sanity - PW HTML Report',
-                        reportDir: 'reports-dev/html',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
-                    publishHTML(target: [
-                        reportName: 'DEV Sanity - Allure Report',
-                        reportDir: 'reports-dev/allure',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
-                    publishHTML(target: [
-                        reportName: 'DEV Sanity - ReportingLabs Report',
-                        reportDir: 'reports-dev/reportinglabs',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
-                }
-            }
-        }
-        // ═════════════════════════════════════════════════
         // STAGE 4: DEPLOY QA + REGRESSION
         // ═════════════════════════════════════════════════
         stage('Deploy to QA') {
@@ -181,7 +103,7 @@ pipeline {
                     '''
                     withCredentials([
                         usernamePassword(credentialsId: 'qa-credentials',
-                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
+                            usernameVariable: 'OPENCART_USERNAME', passwordVariable: 'OPENCART_PASSWORD'),
                         string(credentialsId: 'api-token', variable: 'API_TOKEN'),
                         string(credentialsId: 'oauth-client-id', variable: 'OAUTH_CLIENT_ID'),
                         string(credentialsId: 'oauth-client-secret', variable: 'OAUTH_CLIENT_SECRET'),
@@ -259,7 +181,7 @@ pipeline {
                     '''
                     withCredentials([
                         usernamePassword(credentialsId: 'stage-credentials',
-                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
+                            usernameVariable: 'OPENCART_USERNAME', passwordVariable: 'OPENCART_PASSWORD'),
                         string(credentialsId: 'api-token', variable: 'API_TOKEN'),
                         string(credentialsId: 'oauth-client-id', variable: 'OAUTH_CLIENT_ID'),
                         string(credentialsId: 'oauth-client-secret', variable: 'OAUTH_CLIENT_SECRET'),
@@ -320,7 +242,7 @@ pipeline {
             steps {
                 input message: 'Deploy to PROD?',
                     ok: 'Yes, Deploy!',
-                    submitter: 'admin,ankur'
+                    submitter: 'admin,naveen'
             }
         }
         stage('Deploy to PROD') {
@@ -344,7 +266,7 @@ pipeline {
                     '''
                     withCredentials([
                         usernamePassword(credentialsId: 'prod-credentials',
-                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
+                            usernameVariable: 'OPENCART_USERNAME', passwordVariable: 'OPENCART_PASSWORD'),
                         string(credentialsId: 'api-token', variable: 'API_TOKEN'),
                         string(credentialsId: 'oauth-client-id', variable: 'OAUTH_CLIENT_ID'),
                         string(credentialsId: 'oauth-client-secret', variable: 'OAUTH_CLIENT_SECRET'),
@@ -425,7 +347,7 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
                 )
                 // Email Notification
                 emailext(
-                    to: 'ankurrathore4u@gmail.com,ankkur2sky@gmail.com',
+                    to: 'naveenanimation20@gmail.com,training@naveenautomationlabs.com',
                     subject: "🎭 CI/CD Pipeline — ${statusEmoji} ${buildStatus} — Build #${env.BUILD_NUMBER}",
                     mimeType: 'text/html',
                     body: """
@@ -455,7 +377,7 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
                                     <a href="${env.BUILD_URL}console" style="display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 6px; margin: 4px;">🔍 Console Logs</a>
                                 </div>
                                 <div style="text-align: center; padding: 16px; color: #999; font-size: 12px; border-top: 1px solid #eee;">
-                                     | Playwright Framework
+                                    Naveen Automation Labs | Playwright Framework
                                 </div>
                             </div>
                         </body>
