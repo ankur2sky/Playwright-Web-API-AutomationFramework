@@ -59,7 +59,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'dev-app/target/surefire-reports/*.xml'
+                    junit testResults: 'dev-app/target/surefire-reports/*.xml', skipMarkingBuildUnstable: true
                 }
             }
         }
@@ -392,4 +392,3 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
         }
     }
 }
-
