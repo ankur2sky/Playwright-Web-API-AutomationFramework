@@ -12,12 +12,12 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS-24'
-        maven 'Maven-3.9'
-        jdk 'JDK-17'
-        allure 'Allure'
-    }
+  tools {
+       nodejs 'NodeJs-24'
+       maven 'Maven-3.9'
+       jdk 'JDK-21'
+       allure 'Allure'
+        }
 
     parameters {
         choice(
