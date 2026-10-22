@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 // Jenkinsfile — Master CI/CD Pipeline (WINDOWS VERSION)
 // Playwright TypeScript Framework
-//  Automation Labs
+// Naveen Automation Labs
 // ═══════════════════════════════════════════════════════════════
 // Reports per stage (3 reports × 4 envs = 12 total):
 //   1. PW HTML Report    → reports-{env}/html/
@@ -127,11 +127,9 @@ pipeline {
                 always {
                     bat '''
                         if not exist reports-qa\\html mkdir reports-qa\\html
-                        if not exist reports-qa\\allure mkdir reports-qa\\allure
                         if not exist reports-qa\\reportinglabs mkdir reports-qa\\reportinglabs
                     '''
                     bat 'xcopy qa-tests\\reports\\html-report reports-qa\\html /E /I /Y /Q || exit /b 0'
-                    bat 'call allure generate qa-tests\\allure-results --clean -o reports-qa\\allure || exit /b 0'
                     bat 'xcopy qa-tests\\reporting-labs reports-qa\\reportinglabs /E /I /Y /Q || exit /b 0'
                     publishHTML(target: [
                         reportName: 'QA Regression - PW HTML Report',
@@ -140,13 +138,13 @@ pipeline {
                         keepAll: true,
                         alwaysLinkToLastBuild: true
                     ])
-                    publishHTML(target: [
-                        reportName: 'QA Regression - Allure Report',
-                        reportDir: 'reports-qa/allure',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
+                    script {
+                        try {
+                            allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
+                        } catch (err) {
+                            echo "Allure report skipped: ${err.message}"
+                        }
+                    }
                     publishHTML(target: [
                         reportName: 'QA Regression - ReportingLabs Report',
                         reportDir: 'reports-qa/reportinglabs',
@@ -205,11 +203,9 @@ pipeline {
                 always {
                     bat '''
                         if not exist reports-stage\\html mkdir reports-stage\\html
-                        if not exist reports-stage\\allure mkdir reports-stage\\allure
                         if not exist reports-stage\\reportinglabs mkdir reports-stage\\reportinglabs
                     '''
                     bat 'xcopy qa-tests\\reports\\html-report reports-stage\\html /E /I /Y /Q || exit /b 0'
-                    bat 'call allure generate qa-tests\\allure-results --clean -o reports-stage\\allure || exit /b 0'
                     bat 'xcopy qa-tests\\reporting-labs reports-stage\\reportinglabs /E /I /Y /Q || exit /b 0'
                     publishHTML(target: [
                         reportName: 'STAGE Sanity - PW HTML Report',
@@ -218,13 +214,13 @@ pipeline {
                         keepAll: true,
                         alwaysLinkToLastBuild: true
                     ])
-                    publishHTML(target: [
-                        reportName: 'STAGE Sanity - Allure Report',
-                        reportDir: 'reports-stage/allure',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
+                    script {
+                        try {
+                            allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
+                        } catch (err) {
+                            echo "Allure report skipped: ${err.message}"
+                        }
+                    }
                     publishHTML(target: [
                         reportName: 'STAGE Sanity - ReportingLabs Report',
                         reportDir: 'reports-stage/reportinglabs',
@@ -242,7 +238,7 @@ pipeline {
             steps {
                 input message: 'Deploy to PROD?',
                     ok: 'Yes, Deploy!',
-                    submitter: 'admin,ankur'
+                    submitter: 'admin,naveen'
             }
         }
         stage('Deploy to PROD') {
@@ -290,11 +286,9 @@ pipeline {
                 always {
                     bat '''
                         if not exist reports-prod\\html mkdir reports-prod\\html
-                        if not exist reports-prod\\allure mkdir reports-prod\\allure
                         if not exist reports-prod\\reportinglabs mkdir reports-prod\\reportinglabs
                     '''
                     bat 'xcopy qa-tests\\reports\\html-report reports-prod\\html /E /I /Y /Q || exit /b 0'
-                    bat 'call allure generate qa-tests\\allure-results --clean -o reports-prod\\allure || exit /b 0'
                     bat 'xcopy qa-tests\\reporting-labs reports-prod\\reportinglabs /E /I /Y /Q || exit /b 0'
                     publishHTML(target: [
                         reportName: 'PROD Smoke - PW HTML Report',
@@ -303,13 +297,13 @@ pipeline {
                         keepAll: true,
                         alwaysLinkToLastBuild: true
                     ])
-                    publishHTML(target: [
-                        reportName: 'PROD Smoke - Allure Report',
-                        reportDir: 'reports-prod/allure',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
+                    script {
+                        try {
+                            allure includeProperties: false, results: [[path: 'qa-tests/allure-results']]
+                        } catch (err) {
+                            echo "Allure report skipped: ${err.message}"
+                        }
+                    }
                     publishHTML(target: [
                         reportName: 'PROD Smoke - ReportingLabs Report',
                         reportDir: 'reports-prod/reportinglabs',
@@ -347,7 +341,7 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
                 )
                 // Email Notification
                 emailext(
-                    to: 'ankurrathore4u@gmail.com,ankkur2sky@',
+                    to: 'ankurrathore4u@gmail.com,ankkur2sky@gmail.com',
                     subject: "🎭 CI/CD Pipeline — ${statusEmoji} ${buildStatus} — Build #${env.BUILD_NUMBER}",
                     mimeType: 'text/html',
                     body: """
@@ -377,7 +371,7 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
                                     <a href="${env.BUILD_URL}console" style="display: inline-block; padding: 10px 20px; background: #6c757d; color: white; text-decoration: none; border-radius: 6px; margin: 4px;">🔍 Console Logs</a>
                                 </div>
                                 <div style="text-align: center; padding: 16px; color: #999; font-size: 12px; border-top: 1px solid #eee;">
-                                    | Playwright Framework |
+                                    Naveen Automation Labs | Playwright Framework
                                 </div>
                             </div>
                         </body>
@@ -398,3 +392,4 @@ Duration: ${currentBuild.durationString.replace(' and counting', '')}
         }
     }
 }
+
