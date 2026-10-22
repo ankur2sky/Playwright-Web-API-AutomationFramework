@@ -134,7 +134,7 @@ pipeline {
 
                 always {
 
-                    junit 'dev-app/target/surefire-reports/\*.xml'
+                    junit 'dev-app/target/surefire-reports/*.xml'
 
                 }
 
